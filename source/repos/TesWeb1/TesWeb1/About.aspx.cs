@@ -11,7 +11,12 @@ namespace TesWeb1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //ProductList productlist = new ProductList();
+            //productlist.selectProduct();
 
+            ProductList.Product product = new ProductList.Product();
+            GridView1.DataSource = product.selectProduct();
+            GridView1.DataBind();
         }
     }
 }

@@ -132,6 +132,23 @@ namespace TesWeb1
             public Product() {}
 
 
+            SqlConnection con = new SqlConnection(Properties.Resources.ConnectionString);
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            public DataTable selectProduct()
+            {
+                SqlCommand sql_com = new SqlCommand("uspGetProduct", con);
+                adapter.SelectCommand = sql_com;
+                adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+                con.Open();
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                con.Close();
+
+                return dt;
+            }
+
+
         }
     }
 }
