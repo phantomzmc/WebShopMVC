@@ -130,6 +130,24 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="fonts\Kanit-Black.ttf" />
+    <Content Include="fonts\Kanit-BlackItalic.ttf" />
+    <Content Include="fonts\Kanit-Bold.ttf" />
+    <Content Include="fonts\Kanit-BoldItalic.ttf" />
+    <Content Include="fonts\Kanit-ExtraBold.ttf" />
+    <Content Include="fonts\Kanit-ExtraBoldItalic.ttf" />
+    <Content Include="fonts\Kanit-ExtraLight.ttf" />
+    <Content Include="fonts\Kanit-ExtraLightItalic.ttf" />
+    <Content Include="fonts\Kanit-Italic.ttf" />
+    <Content Include="fonts\Kanit-Light.ttf" />
+    <Content Include="fonts\Kanit-LightItalic.ttf" />
+    <Content Include="fonts\Kanit-Medium.ttf" />
+    <Content Include="fonts\Kanit-MediumItalic.ttf" />
+    <Content Include="fonts\Kanit-Regular.ttf" />
+    <Content Include="fonts\Kanit-SemiBold.ttf" />
+    <Content Include="fonts\Kanit-SemiBoldItalic.ttf" />
+    <Content Include="fonts\Kanit-Thin.ttf" />
+    <Content Include="fonts\Kanit-ThinItalic.ttf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Orderlist.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -222,6 +240,7 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
+    <Compile Include="User.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

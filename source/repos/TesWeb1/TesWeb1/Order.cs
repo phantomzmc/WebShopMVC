@@ -26,12 +26,13 @@ namespace TesWeb1
         public DateTime OrderTime { get; set; }
 
         public Order() { }
+        public Order (int orderid) { OrderID = orderid; }
         public Order(string proid, int orderqty, int orderprice, int userid, DateTime ordertime) { }
 
-        public DataTable selectOrder()
+        public DataSet selectOrder()
         {
             SqlCommand sql_com = new SqlCommand("uspGetOrder", con);
-            DataTable dt = new DataTable();
+            DataSet dt = new DataSet();
             try
             {
                 adapter.SelectCommand = sql_com;
@@ -63,6 +64,20 @@ namespace TesWeb1
 
             con.Open();
             int res = adapter.InsertCommand.ExecuteNonQuery();
+            con.Close();
+
+            return res;
+        }
+
+        public int delOrder(int id)
+        {
+            SqlCommand sql_com = new SqlCommand("uspDelOrder", con);
+            adapter.DeleteCommand = sql_com;
+            adapter.DeleteCommand.CommandType = CommandType.StoredProcedure;
+            adapter.DeleteCommand.Parameters.AddWithValue("@OrderID", id);
+
+            con.Open();
+            int res = adapter.DeleteCommand.ExecuteNonQuery();
             con.Close();
 
             return res;

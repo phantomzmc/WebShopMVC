@@ -9,16 +9,33 @@ namespace TesWeb1
 {
     public partial class Orderlist : System.Web.UI.Page
     {
+        Order order = new Order();
         protected void Page_Load(object sender, EventArgs e)
         {
-            loadOrder();
+            if(!IsPostBack){ 
+                loadOrder();
+            }
         }
 
         public void loadOrder()
         {
-            Order order = new Order();
+            
             GridView_Order.DataSource = order.selectOrder();
             GridView_Order.DataBind();
+        }
+
+        protected void btnEdit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            var btnEdit = (Button)sender;
+            var row = (GridViewRow)btnEdit.NamingContainer;
+            int orderid = int.Parse(row.Cells[0].Text.ToString());
+            order.delOrder(orderid);
+            loadOrder(); 
         }
     }
 }

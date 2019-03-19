@@ -12,8 +12,9 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+<%--    <webopt:bundlereference runat="server" path="~/Content/css" />--%>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="Content/bootstrap.css" />
 
 </head>
 <body>
@@ -34,6 +35,8 @@
                 <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
                 <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
                 <asp:ScriptReference Name="WebFormsBundle" />
+
+                <asp:ScriptReference Path="~/Scripts/bootstrap.min.js" />
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
@@ -52,14 +55,14 @@
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Home</a></li>
                         <li><a runat="server" href="~/About">Product</a></li>
-                        <li><a runat="server" href="~/Contact">Order</a></li>
+                        <li><a runat="server" href="~/Orderlist">Order</a></li>
                         <li><a runat="server" href="~/Contact">Customer</a></li>
 
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="container body-content">
+        <div class="container body-content navbar-fixed-bott" style="padding-top: 70px">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
 

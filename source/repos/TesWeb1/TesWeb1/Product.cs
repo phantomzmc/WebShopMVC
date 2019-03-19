@@ -93,56 +93,9 @@ namespace TesWeb1
 
         #endregion
 
-        //public void selectProduct()
-        //{
-        //    try
-        //    {
-        //        SqlCommand sql_com = new SqlCommand("uspGetProduct", con);
-        //        adapter.SelectCommand = sql_com;
-        //        adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-
-        //        con.Open();
-        //        DataTable dt = new DataTable();
-        //        adapter.Fill(dt);
-        //        foreach (DataRow item in dt.Rows)
-        //        {
-        //            Product product = new Product()
-        //            {
-        //                ProductID = int.Parse(item["ProductName"].ToString()),
-        //                ProductName = item["ProductName"].ToString(),
-        //                ProductPrice = int.Parse(item["ProductPrice"].ToString()),
-        //                ProductDetail = item["ProductDatail"].ToString(),
-        //                TypeProduct = int.Parse(item["TypeProduct"].ToString())
-                      
-        //            };
-        //            productlist.Add(product.ProductID, product);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        string error = ex.Message;
-        //    }
-        //    finally
-        //    {
-        //        con.Close();
-        //    }
-        //}
-
-        public class Product
+        public void selectProduct()
         {
-            public int ProductID { get; set; }
-            public string ProductName { get; set; }
-            public string ProductDatail { get; set; }
-            public int ProductPrice { get; set; }
-            public int TypeProduct { get; set; }
-
-            public Product() {}
-            public Product(string name, int price, string detail, int type) { }
-
-
-            SqlConnection con = new SqlConnection(Properties.Resources.ConnectionString);
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            public DataTable selectProduct()
+            try
             {
                 SqlCommand sql_com = new SqlCommand("uspGetProduct", con);
                 adapter.SelectCommand = sql_com;
@@ -151,11 +104,73 @@ namespace TesWeb1
                 con.Open();
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
+                foreach (DataRow item in dt.Rows)
+                {
+                    Product product = new Product()
+                    {
+                        ProductID = int.Parse(item["ProductName"].ToString()),
+                        ProductName = item["ProductName"].ToString(),
+                        ProductPrice = int.Parse(item["ProductPrice"].ToString()),
+                        ProductDatail = item["ProductDatail"].ToString(),
+                        TypeProduct = int.Parse(item["TypeProduct"].ToString())
+
+                    };
+                    productlist.Add(product.ProductID, product);
+                }
+            }
+            catch (Exception ex)
+            {
+                string error = ex.Message;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public class Product
+        {
+            public int ProductID { get; set; }
+            public string ProductName { get; set; }
+            public string ProductDatail { get; set; }
+            public int ProductPrice { get; set; }
+            public int TypeProduct { get; set; }
+            public string TypeName { get; set; }
+            public string TypeDetail { get; set; }
+
+            public Product() {}
+            public Product(int proid) { } 
+            public Product(string name, int price, string detail, int type) { }
+
+
+            SqlConnection con = new SqlConnection(Properties.Resources.ConnectionString);
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            public DataSet selectProduct()
+            {
+                SqlCommand sql_com = new SqlCommand("uspGetProduct", con);
+                adapter.SelectCommand = sql_com;
+                adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+                con.Open();
+                DataSet dt = new DataSet();
+                adapter.Fill(dt);
                 con.Close();
 
                 return dt;
             }
+            public DataSet selectType()
+            {
+                SqlCommand sql_com = new SqlCommand("uspGetTypeProduct", con);
+                adapter.SelectCommand = sql_com;
+                adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
 
+                con.Open();
+                DataSet dt = new DataSet();
+                adapter.Fill(dt);
+                con.Close();
+
+                return dt;
+            }
             public int addProduct()
             {
                 SqlCommand sql_com = new SqlCommand("uspAddProduct", con);

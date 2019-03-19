@@ -12,15 +12,15 @@
                         <asp:BoundField DataField="OrderQty" HeaderText="OrderQty"/>
                         <asp:BoundField DataField="OrderPrice" HeaderText="OrderPrice"/>
                         <asp:BoundField DataField="OrderTime" HeaderText="OrderTime"/>
-
+                       
                         <asp:TemplateField HeaderText="Edit">
                             <ItemTemplate>
-                                <asp:Button ID="submit" runat="server" Text="Submit" />
+                                <asp:Button ID="btnEdit" runat="server" Text="Edit" CssClass="btn btn-warning" OnClick="btnEdit_Click"/>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="ลบ">
                             <ItemTemplate>
-                                <asp:Button ID="submit" runat="server" Text="Submit"/>
+                                <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="btn btn-danger" OnClick="btnDelete_Click"/>
                             </ItemTemplate>
                     </asp:TemplateField>
                     </Columns>

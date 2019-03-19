@@ -40,13 +40,13 @@ namespace TesWeb1 {
         protected global::System.Web.UI.WebControls.TextBox productdetail_textbox;
         
         /// <summary>
-        /// typeproduct_textbox control.
+        /// DropDownList_TypeProduct control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox typeproduct_textbox;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList_TypeProduct;
         
         /// <summary>
         /// submit control.
@@ -58,13 +58,13 @@ namespace TesWeb1 {
         protected global::System.Web.UI.WebControls.Button submit;
         
         /// <summary>
-        /// text1 control.
+        /// cancel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label text1;
+        protected global::System.Web.UI.WebControls.Button cancel;
         
         /// <summary>
         /// GridView1 control.
