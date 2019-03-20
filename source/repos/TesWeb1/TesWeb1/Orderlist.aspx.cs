@@ -37,5 +37,33 @@ namespace TesWeb1
             order.delOrder(orderid);
             loadOrder(); 
         }
+
+        protected void GridView_Order_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            GridView_Order.EditIndex = e.NewEditIndex;
+            this.loadOrder();
+        }
+
+        protected void GridView_Order_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            //edit data row
+            GridViewRow row = GridView_Order.Rows[e.RowIndex];
+            string productname = (row.FindControl("TextBox_EditName") as TextBox).Text;
+
+            GridView_Order.EditIndex = -1;
+            this.loadOrder();
+        }
+
+        protected void GridView_Order_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            GridView_Order.EditIndex = -1;
+            this.loadOrder();
+        }
+
+        protected void GridView_Order_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            //int orderid = Convert.ToInt32(GridView_Order.DataKeys[e.RowIndex].Values[0]);
+            //this.loadOrder();
+        }
     }
 }

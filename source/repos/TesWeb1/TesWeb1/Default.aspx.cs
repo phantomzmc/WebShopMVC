@@ -9,7 +9,9 @@ namespace TesWeb1
 {
     public partial class _Default : Page
     {
-        ProductList.Product product;
+        //ProductList.Product product;
+        Product product;
+
         User user;
 
         Array items = new[] {
@@ -42,7 +44,8 @@ namespace TesWeb1
         }
         void fetchProduct()
         {
-            product = new ProductList.Product();
+            //product = new ProductList.Product();
+            product = new Product();
             DropDownList1.DataSource = product.selectProduct();
             DropDownList1.DataTextField = "ProductName";
             DropDownList1.DataValueField = "ProductID";

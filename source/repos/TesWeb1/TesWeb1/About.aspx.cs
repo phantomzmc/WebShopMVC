@@ -9,21 +9,20 @@ namespace TesWeb1
 {
     public partial class About : Page
     {
-        ProductList.Product product;
+        //ProductList.Product product;
+        Product product;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                loadData();
+                getProduct();
                 loadType();
             }
         }
-        void loadData()
+        public void getProduct()
         {
-            //ProductList productlist = new ProductList();
-            //productlist.selectProduct();
-            //product.selectProduct();
-            product = new ProductList.Product();
+            product = new Product();
             GridView1.DataSource = product.selectProduct();
             GridView1.DataBind();
         }
@@ -42,7 +41,9 @@ namespace TesWeb1
             string detail = productdetail_textbox.Text.ToString();
             int type = int.Parse(DropDownList_TypeProduct.SelectedValue.ToString());
 
-            product = new ProductList.Product(name, price, detail, type)
+            //product = new ProductList.Product(name, price, detail, type)
+            product = new Product(name, price, detail, type)
+
             {
                 ProductName = name,
                 ProductPrice = price,
@@ -51,7 +52,7 @@ namespace TesWeb1
             };
 
             int res = product.addProduct();
-            loadData();
+            getProduct();
         }
 
         
@@ -60,6 +61,7 @@ namespace TesWeb1
             var btnEdit = (Button)sender;
             var row = (GridViewRow)btnEdit.NamingContainer;
             int id = int.Parse(row.Cells[0].Text);
+
 
             //text1.Text = id.ToString();
         }
@@ -77,17 +79,31 @@ namespace TesWeb1
             var row = (GridViewRow)btnDel.NamingContainer;
             int proid = int.Parse(row.Cells[0].Text.ToString());
 
-            product = new ProductList.Product(proid)
+
+            //product = new ProductList.Product(proid)
+            product = new Product(proid)
+
             {
                 ProductID = proid
             };
             product.deleteProduct();
-            loadData();
+            //loadData();
         }
 
         protected void btnEdit_Click(object sender, EventArgs e)
         {
+            var btnEdit = (Button)sender;
+            var row = (GridViewRow)btnEdit.NamingContainer;
+            int proid = int.Parse(row.Cells[0].Text.ToString());
 
+            //product = new ProductList.Product(proid)
+
+            product = new Product(proid)
+            {
+                ProductID = proid
+            };
+            product.getProduct();
+            Response.Redirect("~/EditProduct.aspx?id=" + proid);
         }
     }
 }

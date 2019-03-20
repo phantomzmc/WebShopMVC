@@ -8,128 +8,130 @@ using System.Data.SqlClient;
 
 namespace TesWeb1
 {
-    public class ProductList : IDictionary<int, ProductList.Product>
-    {
-        public Dictionary<int, ProductList.Product> productlist = new Dictionary<int, ProductList.Product>();
+    //public class ProductList : IDictionary<int, ProductList.Product>
+    //{
+    //    public Dictionary<int, ProductList.Product> productlist = new Dictionary<int, ProductList.Product>();
 
-        SqlConnection con = new SqlConnection(Properties.Resources.ConnectionString);
-        SqlDataAdapter adapter = new SqlDataAdapter();
+        //SqlConnection con = new SqlConnection(Properties.Resources.ConnectionString);
+        //SqlDataAdapter adapter = new SqlDataAdapter();
 
-        #region Imprement
-        public Product this[int key]
-        {
-            get
-            {
-                return (Product)productlist[key];
-            }
-            set
-            {
-                productlist[key] = value;
-            }
-        }
+        //#region Imprement
+        //public Product this[int key]
+        //{
+        //    get
+        //    {
+        //        return (Product)productlist[key];
+        //    }
+        //    set
+        //    {
+        //        productlist[key] = value;
+        //    }
+        //}
 
-        public ICollection<int> Keys => this.productlist.Keys.OfType<int>().ToList();
+        //public ICollection<int> Keys => this.productlist.Keys.OfType<int>().ToList();
 
-        public ICollection<Product> Values => this.productlist.Values.OfType<Product>().ToList();
+        //public ICollection<Product> Values => this.productlist.Values.OfType<Product>().ToList();
 
-        public int Count => this.productlist.Count;
+        //public int Count => this.productlist.Count;
 
-        public bool IsReadOnly { get; }
+        //public bool IsReadOnly { get; }
 
-        public void Add(int key, Product value)
-        {
-            this.productlist.Add(key, value);
-        }
+        //public void Add(int key, Product value)
+        //{
+        //    this.productlist.Add(key, value);
+        //}
 
-        public void Add(KeyValuePair<int, Product> item)
-        {
-            this.productlist.Add(item.Key, item.Value);
-        }
+        //public void Add(KeyValuePair<int, Product> item)
+        //{
+        //    this.productlist.Add(item.Key, item.Value);
+        //}
 
-        public void Clear()
-        {
-            this.productlist.Clear();
-        }
+        //public void Clear()
+        //{
+        //    this.productlist.Clear();
+        //}
 
-        public bool Contains(KeyValuePair<int, Product> item)
-        {
-            return this.productlist.Contains(item);
-        }
+        //public bool Contains(KeyValuePair<int, Product> item)
+        //{
+        //    return this.productlist.Contains(item);
+        //}
 
-        public bool ContainsKey(int key)
-        {
-            return this.productlist.ContainsKey(key);
-        }
+        //public bool ContainsKey(int key)
+        //{
+        //    return this.productlist.ContainsKey(key);
+        //}
 
-        public void CopyTo(KeyValuePair<int, Product>[] array, int arrayIndex)
-        {
+        //public void CopyTo(KeyValuePair<int, Product>[] array, int arrayIndex)
+        //{
             
-        }
+        //}
 
-        public IEnumerator<KeyValuePair<int, Product>> GetEnumerator()
-        {
-            return this.productlist.GetEnumerator();
-        }
+        //public IEnumerator<KeyValuePair<int, Product>> GetEnumerator()
+        //{
+        //    return this.productlist.GetEnumerator();
+        //}
 
-        public bool Remove(int key)
-        {
-            return this.productlist.Remove(key);
-        }
+        //public bool Remove(int key)
+        //{
+        //    return this.productlist.Remove(key);
+        //}
 
-        public bool Remove(KeyValuePair<int, Product> item)
-        {
-            return this.productlist.Remove(item.Key);
-        }
+        //public bool Remove(KeyValuePair<int, Product> item)
+        //{
+        //    return this.productlist.Remove(item.Key);
+        //}
 
-        public bool TryGetValue(int key, out Product value)
-        {
-            return this.productlist.TryGetValue(key, out value);
-        }
+        //public bool TryGetValue(int key, out Product value)
+        //{
+        //    return this.productlist.TryGetValue(key, out value);
+        //}
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.productlist.GetEnumerator();
-        }
+        //IEnumerator IEnumerable.GetEnumerator()
+        //{
+        //    return this.productlist.GetEnumerator();
+        //}
 
-        #endregion
+        //#endregion
 
-        public void selectProduct()
-        {
-            try
-            {
-                SqlCommand sql_com = new SqlCommand("uspGetProduct", con);
-                adapter.SelectCommand = sql_com;
-                adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+        //public void selectProduct()
+        //{
+        //    try
+        //    {
+        //        SqlCommand sql_com = new SqlCommand("uspGetProduct", con);
+        //        adapter.SelectCommand = sql_com;
+        //        adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
 
-                con.Open();
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
-                foreach (DataRow item in dt.Rows)
-                {
-                    Product product = new Product()
-                    {
-                        ProductID = int.Parse(item["ProductName"].ToString()),
-                        ProductName = item["ProductName"].ToString(),
-                        ProductPrice = int.Parse(item["ProductPrice"].ToString()),
-                        ProductDatail = item["ProductDatail"].ToString(),
-                        TypeProduct = int.Parse(item["TypeProduct"].ToString())
+        //        con.Open();
+        //        DataTable dt = new DataTable();
+        //        adapter.Fill(dt);
+        //        foreach (DataRow item in dt.Rows)
+        //        {
+        //            Product product = new Product()
+        //            {
+        //                ProductID = int.Parse(item["ProductName"].ToString()),
+        //                ProductName = item["ProductName"].ToString(),
+        //                ProductPrice = int.Parse(item["ProductPrice"].ToString()),
+        //                ProductDatail = item["ProductDatail"].ToString(),
+        //                TypeProduct = int.Parse(item["TypeProduct"].ToString())
 
-                    };
-                    productlist.Add(product.ProductID, product);
-                }
-            }
-            catch (Exception ex)
-            {
-                string error = ex.Message;
-            }
-            finally
-            {
-                con.Close();
-            }
-        }
+        //            };
+        //            productlist.Add(product.ProductID, product);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        string error = ex.Message;
+        //    }
+        //    finally
+        //    {
+        //        con.Close();
+        //    }
+        //}
 
         public class Product
         {
+            SqlConnection con = new SqlConnection(Properties.Resources.ConnectionString);
+            SqlDataAdapter adapter = new SqlDataAdapter();
             public int ProductID { get; set; }
             public string ProductName { get; set; }
             public string ProductDatail { get; set; }
@@ -143,8 +145,6 @@ namespace TesWeb1
             public Product(string name, int price, string detail, int type) { }
 
 
-            SqlConnection con = new SqlConnection(Properties.Resources.ConnectionString);
-            SqlDataAdapter adapter = new SqlDataAdapter();
             public DataSet selectProduct()
             {
                 SqlCommand sql_com = new SqlCommand("uspGetProduct", con);
@@ -220,7 +220,22 @@ namespace TesWeb1
 
                 return res;
             }
+
+            public DataSet getProduct()
+            {
+                SqlCommand sql_com = new SqlCommand("uspSelectProduct", con);
+                adapter.SelectCommand = sql_com;
+                adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                adapter.SelectCommand.Parameters.AddWithValue("@ProductID", ProductID);
+
+                con.Open();
+                DataSet dt = new DataSet();
+                adapter.Fill(dt);
+                con.Close();
+
+                return dt;
+            }
         }
     }
-}
+//}
     
