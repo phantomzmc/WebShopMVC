@@ -73,37 +73,50 @@ namespace TesWeb1
 
         }
 
-        protected void btnDelete_Click(object sender, EventArgs e)
+        protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            var btnDel = (Button)sender;
-            var row = (GridViewRow)btnDel.NamingContainer;
-            int proid = int.Parse(row.Cells[0].Text.ToString());
+            GridView1.EditIndex = e.NewEditIndex;
+            getProduct();
 
-
-            //product = new ProductList.Product(proid)
-            product = new Product(proid)
-
-            {
-                ProductID = proid
-            };
-            product.deleteProduct();
-            //loadData();
         }
 
-        protected void btnEdit_Click(object sender, EventArgs e)
+        protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            var btnEdit = (Button)sender;
-            var row = (GridViewRow)btnEdit.NamingContainer;
-            int proid = int.Parse(row.Cells[0].Text.ToString());
+            GridViewRow row = GridView1.Rows[e.RowIndex];
+            int productid = int.Parse((row.FindControl("editProductID_TextBox") as TextBox).Text);
+            string productname = (row.FindControl("editProductName_TextBox") as TextBox).Text;
+            int productprice = int.Parse((row.FindControl("editProductPrice_TextBox") as TextBox).Text);
+            string productdetail = (row.FindControl("editProductDetail_TextBox") as TextBox).Text;
+            int type_product = 1;
 
-            //product = new ProductList.Product(proid)
-
-            product = new Product(proid)
+            product = new Product(productid,productname, productprice, productdetail, type_product)
             {
-                ProductID = proid
+                ProductID = productid,
+                ProductName = productname,
+                ProductPrice = productprice,
+                ProductDatail = productdetail,
+                TypeProduct = type_product
+
             };
-            product.getProduct();
-            Response.Redirect("~/EditProduct.aspx?id=" + proid);
+            product.editProduct();
+            GridView1.EditIndex = -1;
+            this.getProduct();
+        }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int productid = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values[0]);
+            product = new Product(productid)
+            {
+                ProductID = productid
+            };
+            product.deleteProduct();
+            this.getProduct();
         }
     }
 }

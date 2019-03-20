@@ -143,9 +143,10 @@ namespace TesWeb1
             public Product() {}
             public Product(int proid) { } 
             public Product(string name, int price, string detail, int type) { }
+            public Product(int proid,string name, int price, string detail, int type) { }
 
 
-            public DataSet selectProduct()
+        public DataSet selectProduct()
             {
                 SqlCommand sql_com = new SqlCommand("uspGetProduct", con);
                 adapter.SelectCommand = sql_com;
@@ -209,7 +210,7 @@ namespace TesWeb1
 
             public int deleteProduct()
             {
-                SqlCommand sql_com = new SqlCommand("uspDeleteProduct", con);
+                SqlCommand sql_com = new SqlCommand("uspDelProduct", con);
                 adapter.DeleteCommand = sql_com;
                 adapter.DeleteCommand.CommandType = CommandType.StoredProcedure;
                 adapter.DeleteCommand.Parameters.AddWithValue("@ProductID", ProductID);
@@ -221,7 +222,7 @@ namespace TesWeb1
                 return res;
             }
 
-            public DataSet getProduct()
+            public DataTable getProduct()
             {
                 SqlCommand sql_com = new SqlCommand("uspSelectProduct", con);
                 adapter.SelectCommand = sql_com;
@@ -229,7 +230,7 @@ namespace TesWeb1
                 adapter.SelectCommand.Parameters.AddWithValue("@ProductID", ProductID);
 
                 con.Open();
-                DataSet dt = new DataSet();
+                DataTable dt = new DataTable();
                 adapter.Fill(dt);
                 con.Close();
 

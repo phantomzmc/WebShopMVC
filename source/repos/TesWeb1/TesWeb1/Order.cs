@@ -27,7 +27,7 @@ namespace TesWeb1
 
         public Order() { }
         public Order (int orderid) { OrderID = orderid; }
-        public Order(string proid, int orderqty, int orderprice, int userid, DateTime ordertime) { }
+        public Order(int proid, int orderqty, int orderprice, int userid, DateTime ordertime) { }
 
         public DataSet selectOrder()
         {

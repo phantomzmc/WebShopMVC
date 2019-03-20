@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
 
 namespace TesWeb1
 {
@@ -59,14 +60,60 @@ namespace TesWeb1
             DropDownList2.DataBind();
         }
 
-        protected void DropDownList1_SelectedIndexChanged1(object sender, EventArgs e)
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DropDownList1.SelectedValue = DropDownList1.SelectedItem.Value;
+            int proid = int.Parse(DropDownList1.SelectedValue.ToString());
+
+            product = new Product(proid)
+            {
+                ProductID = proid
+            };
+            product.getProduct();
+            this.sumOrder();
 
         }
-
-        protected void Unnamed4_Click(object sender, EventArgs e)
+        public void sumOrder()
         {
+            if (IsPostBack)
+            {
+                DataTable dt = product.getProduct();
+                int qty = int.Parse(DropDownList2.SelectedValue.ToString());
+                int price = Convert.ToInt32(dt.Rows[0]["ProductPrice"]);
+                int total = price * qty;
+                Label2.Text = dt.Rows[0]["ProductName"].ToString();
+                Label4.Text = DropDownList2.SelectedValue.ToString();
+                Label6.Text = total.ToString();
+            }
+
+
+        }
+        public void addOrders()
+        {
+            int proid = int.Parse(DropDownList1.SelectedValue.ToString());
+            int qty = int.Parse(DropDownList2.SelectedValue.ToString());
+            int price = int.Parse(Label6.Text.ToString());
+            int userid = int.Parse(DropDownList3.SelectedValue.ToString());
+            DateTime ordertime = DateTime.Now;
+
+            Order order = new Order(proid, qty, price, userid, ordertime)
+            {
+                ProductID = proid,
+                OrderQty = qty,
+                OrderPrice =price,
+                UserID = userid,
+                OrderTime = ordertime
+            };
+            order.addOrder();
+        }
+
+        protected void addOrder_Click(object sender, EventArgs e)
+        {
+            this.addOrders();
+        }
+
+        protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.sumOrder();
 
         }
     }

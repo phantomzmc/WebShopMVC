@@ -65,5 +65,10 @@ namespace TesWeb1
             //int orderid = Convert.ToInt32(GridView_Order.DataKeys[e.RowIndex].Values[0]);
             //this.loadOrder();
         }
+
+        protected void GridView_Order_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
