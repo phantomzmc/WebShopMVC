@@ -48,7 +48,28 @@ namespace TesWeb1
         {
             //edit data row
             GridViewRow row = GridView_Order.Rows[e.RowIndex];
-            string productname = (row.FindControl("TextBox_EditName") as TextBox).Text;
+            //int orderid = int.Parse(row.Cells[0].Text.ToString());
+            int orderid = Convert.ToInt32(GridView_Order.DataKeys[e.RowIndex].Values[0]);
+            string productname = (row.FindControl("orderProductName_TextBox") as TextBox).Text;
+            int productprice = int.Parse((row.FindControl("orderProductPrice_TextBox") as TextBox).Text);
+            string firstname = (row.FindControl("orderFirstName_TextBox") as TextBox).Text;
+            string lastname = (row.FindControl("orderLastName_TextBox") as TextBox).Text;
+            int orderqty = int.Parse((row.FindControl("orderQty_TextBox") as TextBox).Text);
+            int orderprice = int.Parse((row.FindControl("orderPrice_TextBox") as TextBox).Text);
+            DateTime ordertime = Convert.ToDateTime(row.FindControl("orderPrice_TextBox") as TextBox);
+
+            order = new Order(orderid, productname, productprice, firstname, lastname, orderqty, orderprice, ordertime)
+            {
+                OrderID = orderid,
+                ProductName = productname,
+                ProductPrice = productprice,
+                FirstName = firstname,
+                LastName = lastname,
+                OrderQty = orderqty,
+                OrderPrice = orderprice,
+                OrderTime = ordertime
+            };
+            order.editOrder();
 
             GridView_Order.EditIndex = -1;
             this.loadOrder();

@@ -28,6 +28,7 @@ namespace TesWeb1
         public Order() { }
         public Order (int orderid) { OrderID = orderid; }
         public Order(int proid, int orderqty, int orderprice, int userid, DateTime ordertime) { }
+        public Order(int proid, string productname, int productprice, string firstname, string lastname, int orderqty, int orderprice, DateTime ordertime) { }
 
         public DataSet selectOrder()
         {
@@ -81,6 +82,13 @@ namespace TesWeb1
             con.Close();
 
             return res;
+        }
+        public void editOrder()
+        {
+            SqlCommand sql_com = new SqlCommand("uspUpdateOrder", con);
+            adapter.UpdateCommand = sql_com;
+            adapter.UpdateCommand.CommandType = CommandType.StoredProcedure;
+            adapter.UpdateCommand.Parameters.AddWithValue("@ProductName", ProductName);
         }
     }
 }

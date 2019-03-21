@@ -52,6 +52,7 @@ namespace TesWeb1
             };
 
             int res = product.addProduct();
+            testModal();
             getProduct();
         }
 
@@ -117,6 +118,17 @@ namespace TesWeb1
             };
             product.deleteProduct();
             this.getProduct();
+        }
+
+        public void testModal()
+        {
+            string productname = productname_textbox.Text.ToString();
+            string productprice = productprice_textbox.Text.ToString();
+            string body = "ได้เพิ่มรายการ " + productname + " ราคา : " + productprice + " บาท ลงในระบบเรียบร้อย";
+            lblModalTitle.Text = "เพิ่มรายการสินค้าเรียบร้อย";
+            lblModalBody.Text = body;
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
+            upModal.Update();
         }
     }
 }

@@ -136,17 +136,21 @@ namespace TesWeb1
             public string ProductName { get; set; }
             public string ProductDatail { get; set; }
             public int ProductPrice { get; set; }
-            public int TypeProduct { get; set; }
+            public int TypeProduct { get; set; } // TypeID
+            public int TypeID { get; set; }
             public string TypeName { get; set; }
             public string TypeDetail { get; set; }
+            
 
             public Product() {}
             public Product(int proid) { } 
             public Product(string name, int price, string detail, int type) { }
             public Product(int proid,string name, int price, string detail, int type) { }
+            public Product(string typename, string typedetail) { }
+            public Product(int typeid, string typename, string typedetail) { }
 
 
-        public DataSet selectProduct()
+            public DataSet selectProduct()
             {
                 SqlCommand sql_com = new SqlCommand("uspGetProduct", con);
                 adapter.SelectCommand = sql_com;
@@ -189,6 +193,18 @@ namespace TesWeb1
                 return res;
 
             }
+            public void addTypeProduct()
+            {
+                SqlCommand sql_com = new SqlCommand("uspAddProductType", con);
+                adapter.InsertCommand = sql_com;
+                adapter.InsertCommand.CommandType = CommandType.StoredProcedure;
+                adapter.InsertCommand.Parameters.AddWithValue("@TypeName", TypeName);
+                adapter.InsertCommand.Parameters.AddWithValue("@TypeDetail", TypeDetail);
+
+                con.Open();
+                adapter.InsertCommand.ExecuteNonQuery();
+                con.Close();
+            }
 
             public int editProduct()
             {
@@ -207,7 +223,20 @@ namespace TesWeb1
 
                 return res;
             }
+            public void editTypeProduct()
+            {
+                SqlCommand sql_com = new SqlCommand("uspUpdateTypeProduct", con);
+                adapter.UpdateCommand = sql_com;
+                adapter.UpdateCommand.CommandType = CommandType.StoredProcedure;
+                adapter.UpdateCommand.Parameters.AddWithValue("@TypeID", TypeID);
+                adapter.UpdateCommand.Parameters.AddWithValue("@TypeName", TypeName);
+                adapter.UpdateCommand.Parameters.AddWithValue("@TypeDetail", TypeDetail);
 
+                con.Open();
+                adapter.UpdateCommand.ExecuteNonQuery();
+                con.Close();
+
+            }
             public int deleteProduct()
             {
                 SqlCommand sql_com = new SqlCommand("uspDelProduct", con);
@@ -222,6 +251,17 @@ namespace TesWeb1
                 return res;
             }
 
+            public void deleteTypeProduct()
+            {
+                SqlCommand sql_com = new SqlCommand("uspDelTypeProduct", con);
+                adapter.DeleteCommand = sql_com;
+                adapter.DeleteCommand.CommandType = CommandType.StoredProcedure;
+                adapter.DeleteCommand.Parameters.AddWithValue("@TypeID", TypeID);
+
+                con.Open();
+                adapter.DeleteCommand.ExecuteNonQuery();
+                con.Close();
+            }
             public DataTable getProduct()
             {
                 SqlCommand sql_com = new SqlCommand("uspSelectProduct", con);

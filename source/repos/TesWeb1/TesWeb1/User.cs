@@ -20,11 +20,12 @@ namespace TesWeb1
         public string Tel { get; set; }
         public string Gender { get; set; }
         public string NumAddress { get; set; }
-        public string Tumbon { get; set; }
+        public string Tambon { get; set; }
         public string Amphoe { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
         public int PostNumber { get; set; }
+        public DateTime BirthDay {get; set;}
 
        
         public User() { }
@@ -41,6 +42,29 @@ namespace TesWeb1
             con.Close();
 
             return dt;
+        }
+
+        public void addCustomer()
+        {
+            SqlCommand sql_com = new SqlCommand("uspAddUser", con);
+            adapter.InsertCommand = sql_com;
+            adapter.InsertCommand.CommandType = CommandType.StoredProcedure;
+            adapter.InsertCommand.Parameters.AddWithValue("@FirstName", FirstName);
+            adapter.InsertCommand.Parameters.AddWithValue("@LastName", LastName);
+            adapter.InsertCommand.Parameters.AddWithValue("@Email", Email);
+            adapter.InsertCommand.Parameters.AddWithValue("@Tel", Tel);
+            adapter.InsertCommand.Parameters.AddWithValue("@Username", Username);
+            adapter.InsertCommand.Parameters.AddWithValue("@BirthDay", BirthDay);
+            adapter.InsertCommand.Parameters.AddWithValue("@Gender", Gender);
+            adapter.InsertCommand.Parameters.AddWithValue("@Tambon", Tambon);
+            adapter.InsertCommand.Parameters.AddWithValue("@Amphoe", Amphoe);
+            adapter.InsertCommand.Parameters.AddWithValue("@City", City);
+            adapter.InsertCommand.Parameters.AddWithValue("@Country", Country);
+            adapter.InsertCommand.Parameters.AddWithValue("@PostNumber", PostNumber);
+
+            con.Open();
+            adapter.InsertCommand.ExecuteNonQuery();
+            con.Close();
         }
     }
 }

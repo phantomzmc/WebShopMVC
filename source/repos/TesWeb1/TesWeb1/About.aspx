@@ -74,7 +74,8 @@
                     <div class="row">
                         <div class="column" style="padding-top : 20px;padding : 20px; font-family :'Kanit-Black';">
                             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="table"
-                                BorderWidth="0px" GridLines="None" OnRowEditing="GridView1_RowEditing"
+                                BorderWidth="0px" GridLines="None" 
+                                OnRowEditing="GridView1_RowEditing"
                                 OnRowUpdating="GridView1_RowUpdating"
                                 OnSelectedIndexChanged="GridView1_SelectedIndexChanged" DataKeyNames="ProductID"
                                 OnRowDeleting="GridView1_RowDeleting">
@@ -145,6 +146,32 @@
                                 </Columns>
                             </asp:GridView>
                         </div>
+                    </div>
+                </div>
+                <!-- Bootstrap Modal Dialog -->
+                <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <asp:UpdatePanel ID="upModal" runat="server" ChildrenAsTriggers="false"
+                            UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title">
+                                            <asp:Label ID="lblModalTitle" runat="server" Text=""></asp:Label>
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <asp:Label ID="lblModalBody" runat="server" Text=""></asp:Label>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-info" data-dismiss="modal"
+                                            aria-hidden="true">Close</button>
+                                    </div>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                     </div>
                 </div>
             </asp:Panel>
