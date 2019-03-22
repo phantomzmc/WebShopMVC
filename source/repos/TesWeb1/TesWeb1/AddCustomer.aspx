@@ -35,11 +35,15 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-xs-12">
-                            <div class="form-group col-sm-6 col-md-6">
-                                <asp:Label ID="Label6" runat="server" Text="BirthDay"></asp:Label>
-                                <asp:TextBox ID="TextBox6" runat="server" CssClass="form-control"></asp:TextBox>
+                            <div class="form-group col-sm-4 col-md-4">
+                                <asp:Label ID="Label14" runat="server" Text="UserID"></asp:Label>
+                                <asp:TextBox ID="userid_TextBox" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
-                            <div class="form-group col-sm-6 col-md-6">
+                            <div class="form-group col-sm-4 col-md-4">
+                                <asp:Label ID="Label6" runat="server" Text="BirthDay"></asp:Label>
+                                <asp:TextBox ID="brithday_TextBox" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                            </div>
+                            <div class="form-group col-sm-4 col-md-4">
                                 <asp:Label ID="Label7" runat="server" Text="Gender"></asp:Label>
                                 <asp:TextBox ID="gender_TextBox" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
@@ -83,7 +87,7 @@
                         <div class="col-sm-12 col-md-12 col-xs-12">
                             <div class="form-group col-sm-6 col-md-6">
                                 <asp:Button ID="btnSubmit" runat="server" Text="Submit"
-                                    CssClass="btn btn-success btn-block" />
+                                    CssClass="btn btn-success btn-block" onclick="btnSubmit_Click"/>
                             </div>
                             <div class="form-group col-sm-6 col-md-6">
                                 <asp:Button ID="btnCancel" runat="server" Text="Cancel"

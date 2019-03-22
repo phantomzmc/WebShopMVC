@@ -18,7 +18,7 @@ namespace TesWeb1
         public int ProductID { get; set; }
         public string ProductName { get; set; }
         public int ProductPrice { get; set; }
-        public int UserID { get; set; }
+        public string UserID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int OrderQty { get; set; }
@@ -27,7 +27,7 @@ namespace TesWeb1
 
         public Order() { }
         public Order (int orderid) { OrderID = orderid; }
-        public Order(int proid, int orderqty, int orderprice, int userid, DateTime ordertime) { }
+        public Order(int proid, int orderqty, int orderprice, string userid, DateTime ordertime) { }
         public Order(int proid, string productname, int productprice, string firstname, string lastname, int orderqty, int orderprice, DateTime ordertime) { }
 
         public DataSet selectOrder()

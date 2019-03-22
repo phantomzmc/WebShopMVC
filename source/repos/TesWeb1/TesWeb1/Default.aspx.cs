@@ -12,7 +12,6 @@ namespace TesWeb1
     {
         //ProductList.Product product;
         Product product;
-
         User user;
 
         Array items = new[] {
@@ -23,17 +22,25 @@ namespace TesWeb1
                         new { Text = "5", Value = "5" }
         };
 
+        int qty = 1;
         protected void Page_Load(object sender, EventArgs e)
         {
+            Panel2.Visible = false;
             if (!IsPostBack)
             {
+                loadOrder();
                 fetchUser();
                 fetchProduct();
-                fetchQty();
+                //fetchQty();
             }
 
         }
-
+        public void loadOrder()
+        {
+            Order order = new Order();
+            GridView_Order.DataSource = order.selectOrder();
+            GridView_Order.DataBind();
+        }
         void fetchUser()
         {
             user = new User();
@@ -52,13 +59,13 @@ namespace TesWeb1
             DropDownList1.DataValueField = "ProductID";
             DropDownList1.DataBind();
         }
-        void fetchQty()
-        {
-            DropDownList2.DataSource = items;
-            DropDownList2.DataTextField = "Text";
-            DropDownList2.DataValueField = "Value";
-            DropDownList2.DataBind();
-        }
+        //void fetchQty()
+        //{
+        //    DropDownList2.DataSource = items;
+        //    DropDownList2.DataTextField = "Text";
+        //    DropDownList2.DataValueField = "Value";
+        //    DropDownList2.DataBind();
+        //}
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -77,11 +84,12 @@ namespace TesWeb1
             if (IsPostBack)
             {
                 DataTable dt = product.getProduct();
-                int qty = int.Parse(DropDownList2.SelectedValue.ToString());
+                //int qty = int.Parse(DropDownList2.SelectedValue.ToString());
+                qty = int.Parse(qty_TextBox.Text.ToString());
                 int price = Convert.ToInt32(dt.Rows[0]["ProductPrice"]);
                 int total = price * qty;
                 Label2.Text = dt.Rows[0]["ProductName"].ToString();
-                Label4.Text = DropDownList2.SelectedValue.ToString();
+                Label4.Text = qty_TextBox.Text.ToString();
                 Label6.Text = total.ToString();
             }
 
@@ -90,9 +98,9 @@ namespace TesWeb1
         public void addOrders()
         {
             int proid = int.Parse(DropDownList1.SelectedValue.ToString());
-            int qty = int.Parse(DropDownList2.SelectedValue.ToString());
+            qty = int.Parse(qty_TextBox.Text.ToString());
             int price = int.Parse(Label6.Text.ToString());
-            int userid = int.Parse(DropDownList3.SelectedValue.ToString());
+            string userid = DropDownList3.SelectedValue.ToString();
             DateTime ordertime = DateTime.Now;
 
             Order order = new Order(proid, qty, price, userid, ordertime)
@@ -104,17 +112,31 @@ namespace TesWeb1
                 OrderTime = ordertime
             };
             order.addOrder();
+            this.testModal();
+            this.loadOrder();
         }
 
         protected void addOrder_Click(object sender, EventArgs e)
         {
             this.addOrders();
+            Panel2.Visible = true;
+
         }
 
         protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.sumOrder();
 
+        }
+        public void testModal()
+        {
+            string productname = "productname";
+            string productprice = "productprice";
+            string body = "ได้เพิ่มรายการ " + productname + " ราคา : " + productprice + " บาท ลงในระบบเรียบร้อย";
+            lblModalTitle.Text = "เพิ่มรายการสินค้าเรียบร้อย";
+            lblModalBody.Text = body;
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
+            upModal.Update();
         }
     }
 }
