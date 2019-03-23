@@ -4,7 +4,7 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <asp:Panel ID="Panel1" runat="server">
-                <div class="container">
+                <div class="container" style="font-family : 'Kanit';">
                     <div class="row">
                         <div class="col-md-2"></div>
                         <div class="col-md-8">
@@ -72,7 +72,7 @@
                         <div class="col-md-2"></div>
                     </div>
                     <div class="row">
-                        <div class="column" style="padding-top : 20px;padding : 20px; font-family :'Kanit-Black';">
+                        <div class="column" style="padding-top : 20px;padding : 20px; font-family :'Kanit';">
                             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="table"
                                 BorderWidth="0px" GridLines="None" 
                                 OnRowEditing="GridView1_RowEditing"

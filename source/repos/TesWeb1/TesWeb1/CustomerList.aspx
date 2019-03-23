@@ -7,7 +7,7 @@
                     <div class="col-sm-12 col-md-12 col-xs-12">
                         <asp:GridView ID="GridViewCustomer" runat="server" AutoGenerateColumns="False" BorderWidth="0px"
                             GridLines="None" CssClass="table table-hover" DataKeyNames="UserID"
-                            OnRowEditing="GridViewCustomer_RowEditing">
+                            OnRowEditing="GridViewCustomer_RowEditing" style="font-family : 'Kanit';">
                             <Columns>
                                 <asp:BoundField DataField="UserID" HeaderText="UserID" />
                                 <asp:BoundField DataField="FirstName" HeaderText="FirstName" />
@@ -43,7 +43,7 @@
 
             </asp:Panel>
             <asp:Panel ID="Panel2" runat="server">
-                <div class="container">
+                <div class="container" style="font-family : 'Kanit';">
                     <div class="col-sm-1 col-md-1"></div>
                     <div class="col-sm-10 col-md-10 col-xs-12">
                         <div class="row">
@@ -167,6 +167,32 @@
                         </div>
                     </div>
                     <div class="col-sm-1 col-md-1"></div>
+                </div>
+                <!-- Bootstrap Modal Dialog -->
+                <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <asp:UpdatePanel ID="upModal" runat="server" ChildrenAsTriggers="false"
+                            UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="modal-content" style="font-family : 'Kanit';">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title">
+                                            <asp:Label ID="Label15" runat="server" Text=""></asp:Label>
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <asp:Label ID="lblModalBody" runat="server" Text=""></asp:Label>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-info" data-dismiss="modal"
+                                            aria-hidden="true">Close</button>
+                                    </div>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
                 </div>
             </asp:Panel>
         </ContentTemplate>

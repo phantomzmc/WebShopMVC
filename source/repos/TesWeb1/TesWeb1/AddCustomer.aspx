@@ -3,7 +3,14 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <asp:Panel ID="Panel1" runat="server">
-                <div class="container">
+                <div class="container" style="font-family : 'Kanit';">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-xs-12">
+                            <div style="padding-top : 20px; padding-bottom:20px;">
+                                <h2 style="font-family : 'Kanit';">AddUser</h2>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-xs-12">
                             <div class="form-group col-sm-6 col-md-6">

@@ -10,7 +10,7 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <asp:Panel ID="Panel1" runat="server">
-                <div class="container">
+                <div class="container" style="font-family : 'Kanit';">
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-xs-12" style="padding : 20px;">
                             <div class="panel panel-primary">
@@ -41,24 +41,54 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div style="padding : 20px;">
                                             <div class="form-group">
-                                                <asp:Label runat="server" Text="Product Name : "
+                                                <asp:Label runat="server" Text="Select BY : "
                                                     CssClass="control-label col-sm-2">
                                                 </asp:Label>
                                                 <div class="col-sm-8">
-                                                    <asp:DropDownList ID="DropDownList1" runat="server"
+                                                    <asp:DropDownList ID="DropDownList2" runat="server"
                                                         CssClass="form-control" AutoPostBack="true"
-                                                        OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+                                                        OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged">
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
                                         </div>
+                                        <asp:Panel ID="Panel3" runat="server">
+                                            <div style="padding : 20px;">
+                                                <div class="form-group">
+                                                    <asp:Label runat="server" Text="Type Name : "
+                                                        CssClass="control-label col-sm-2">
+                                                    </asp:Label>
+                                                    <div class="col-sm-8">
+                                                        <asp:DropDownList ID="DropDownList4" runat="server"
+                                                            CssClass="form-control" AutoPostBack="true"
+                                                            OnSelectedIndexChanged="DropDownList4_SelectedIndexChanged">
+                                                        </asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </asp:Panel>
+                                        <asp:Panel ID="Panel4" runat="server">
+                                            <div style="padding : 20px;">
+                                                <div class="form-group">
+                                                    <asp:Label runat="server" Text="Product Name : "
+                                                        CssClass="control-label col-sm-2">
+                                                    </asp:Label>
+                                                    <div class="col-sm-8">
+                                                        <asp:DropDownList ID="DropDownList1" runat="server"
+                                                            CssClass="form-control" AutoPostBack="true"
+                                                            OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+                                                        </asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </asp:Panel>
+
 
                                     </div>
                                     <div class="col-sm-4 col-md-4" style="margin-top:20px;">
-                                        <div class="container">
+                                        <div class="container" style="font-family : 'Kanit';">
                                             <div class="row">
                                                 <asp:Label ID="Label1" runat="server" Text="Name : "
                                                     CssClass="control-label col-sm-1">
@@ -108,7 +138,7 @@
                             <asp:Panel ID="Panel2" runat="server">
                                 <div class="row">
                                     <div class="column"
-                                        style="padding-top : 20px;padding : 20px; font-family :'Kanit-Black';">
+                                        style="padding-top : 20px;padding : 20px; font-family :'Kanit';">
                                         <asp:GridView ID="GridView_Order" runat="server" AutoGenerateColumns="False"
                                             CssClass="table table-hover" BorderWidth="0px" GridLines="None">
                                             <Columns>
@@ -221,7 +251,7 @@
                         <asp:UpdatePanel ID="upModal" runat="server" ChildrenAsTriggers="false"
                             UpdateMode="Conditional">
                             <ContentTemplate>
-                                <div class="modal-content">
+                                <div class="modal-content" style="font-family : 'Kanit';">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal"
                                             aria-hidden="true">&times;</button>

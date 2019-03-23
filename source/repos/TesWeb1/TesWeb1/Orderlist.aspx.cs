@@ -9,7 +9,8 @@ namespace TesWeb1
 {
     public partial class Orderlist : System.Web.UI.Page
     {
-        Order order = new Order();
+        OrderList orderlist;
+        OrderList.Order order = new OrderList.Order();
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack){ 
@@ -19,8 +20,10 @@ namespace TesWeb1
 
         public void loadOrder()
         {
-            
-            GridView_Order.DataSource = order.selectOrder();
+            orderlist = new OrderList();
+            orderlist.selectOrders();
+            GridView_Order.DataSource = orderlist.Values;
+            //GridView_Order.DataSource = order.selectOrder();
             GridView_Order.DataBind();
         }
 
@@ -58,7 +61,7 @@ namespace TesWeb1
             int orderprice = int.Parse((row.FindControl("orderPrice_TextBox") as TextBox).Text);
             DateTime ordertime = Convert.ToDateTime(row.FindControl("orderPrice_TextBox") as TextBox);
 
-            order = new Order(orderid, productname, productprice, firstname, lastname, orderqty, orderprice, ordertime)
+            order = new OrderList.Order(orderid, productname, productprice, firstname, lastname, orderqty, orderprice, ordertime)
             {
                 OrderID = orderid,
                 ProductName = productname,

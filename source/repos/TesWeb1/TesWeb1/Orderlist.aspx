@@ -5,7 +5,7 @@
             <asp:Panel ID="Panel1" runat="server">
 
                 <div class="row">
-                    <div class="column" style="padding-top : 20px;padding : 20px; font-family :'Kanit-Black';">
+                    <div class="column" style="padding-top : 20px;padding : 20px; font-family :'Kanit';">
                         <asp:GridView ID="GridView_Order" runat="server" AutoGenerateColumns="False"
                             CssClass="table table-hover" BorderWidth="0px" GridLines="None" DataKeyNames="OrderID"
                             OnRowCancelingEdit="GridView_Order_RowCancelingEdit"

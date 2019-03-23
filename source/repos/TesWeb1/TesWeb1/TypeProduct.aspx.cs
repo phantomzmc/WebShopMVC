@@ -9,7 +9,7 @@ namespace TesWeb1
 {
     public partial class TypeProduct : System.Web.UI.Page
     {
-        Product product;
+        ProductList.Product product;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -20,8 +20,10 @@ namespace TesWeb1
 
         public void loadTypeProduct()
         {
-            product = new Product();
-            GridView2.DataSource = product.selectType();
+            //product = new ProductList.Product();
+            ProductList products = new ProductList();
+            products.selectType();
+            GridView2.DataSource = products.Values;
             GridView2.DataBind();
         }
         protected void submitType_Click(object sender, EventArgs e)
@@ -29,7 +31,7 @@ namespace TesWeb1
             string typename = typename_TextBox.Text.ToString();
             string typedetail = typedetail_TextBox.Text.ToString();
 
-            product = new Product(typename, typedetail)
+            product = new ProductList.Product(typename, typedetail)
             {
                 TypeName = typename,
                 TypeDetail = typedetail
@@ -54,7 +56,7 @@ namespace TesWeb1
             GridViewRow row = GridView2.Rows[e.RowIndex];
             int typeid = Convert.ToInt32(GridView2.DataKeys[e.RowIndex].Values[0]);
 
-            product = new Product(typeid)
+            product = new ProductList.Product(typeid)
             {
                 TypeID = typeid
             };
@@ -69,7 +71,7 @@ namespace TesWeb1
             string typename = (row.FindControl("typename_TextBox") as TextBox).Text;
             string typedetail = (row.FindControl("typedetail_TextBox") as TextBox).Text;
 
-            product = new Product(typeid, typename, typedetail)
+            product = new ProductList.Product(typeid, typename, typedetail)
             {
                 TypeID = typeid,
                 TypeName = typename,

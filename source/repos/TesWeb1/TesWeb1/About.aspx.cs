@@ -9,8 +9,8 @@ namespace TesWeb1
 {
     public partial class About : Page
     {
-        //ProductList.Product product;
-        Product product;
+        ProductList.Product product;
+        ProductList products;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,14 +22,19 @@ namespace TesWeb1
         }
         public void getProduct()
         {
-            product = new Product();
-            GridView1.DataSource = product.selectProduct();
+            //product = new Product();
+            //GridView1.DataSource = product.selectProduct();
+            products = new ProductList();
+            products.selectProduct();
+            GridView1.DataSource = products.Values;
             GridView1.DataBind();
         }
         void loadType()
         {
-            User user = new User();
-            DropDownList_TypeProduct.DataSource = product.selectType();
+            //UserDic.User user = new UserDic.User();0
+            ProductList products = new ProductList();
+            products.selectType();
+            DropDownList_TypeProduct.DataSource = products.Values;
             DropDownList_TypeProduct.DataTextField = "TypeName";
             DropDownList_TypeProduct.DataValueField = "TypeID";
             DropDownList_TypeProduct.DataBind();
@@ -41,8 +46,8 @@ namespace TesWeb1
             string detail = productdetail_textbox.Text.ToString();
             int type = int.Parse(DropDownList_TypeProduct.SelectedValue.ToString());
 
-            //product = new ProductList.Product(name, price, detail, type)
-            product = new Product(name, price, detail, type)
+            product = new ProductList.Product(name, price, detail, type)
+            //product = new Product(name, price, detail, type)
 
             {
                 ProductName = name,
@@ -90,7 +95,9 @@ namespace TesWeb1
             string productdetail = (row.FindControl("editProductDetail_TextBox") as TextBox).Text;
             int type_product = 1;
 
-            product = new Product(productid,productname, productprice, productdetail, type_product)
+            product = new ProductList.Product(productid, productname, productprice, productdetail, type_product)
+
+            //product = new Product(productid,productname, productprice, productdetail, type_product)
             {
                 ProductID = productid,
                 ProductName = productname,
@@ -112,7 +119,7 @@ namespace TesWeb1
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             int productid = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values[0]);
-            product = new Product(productid)
+            product = new ProductList.Product(productid)
             {
                 ProductID = productid
             };

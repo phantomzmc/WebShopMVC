@@ -10,41 +10,48 @@ namespace TesWeb1
 {
     public partial class _Default : Page
     {
-        //ProductList.Product product;
-        Product product;
-        User user;
+        ProductList.Product product;
+        ProductList products;
+        UserDic.User user;
+        UserDic users;
 
         Array items = new[] {
-                        new { Text = "1", Value = "1" },
-                        new { Text = "2", Value = "2" },
-                        new { Text = "3", Value = "3" },
-                        new { Text = "4", Value = "4" },
-                        new { Text = "5", Value = "5" }
+                        new { Text = "ProductName", Value = "" },
+                        new { Text = "Typename", Value = "Type" }                      
         };
 
         int qty = 1;
         protected void Page_Load(object sender, EventArgs e)
         {
             Panel2.Visible = false;
+            Panel3.Visible = false;
+            Panel4.Visible = false;
             if (!IsPostBack)
             {
                 loadOrder();
                 fetchUser();
-                fetchProduct();
+                fetchSelect();
+                this.fetchType();
+
+                //fetchProduct();
                 //fetchQty();
             }
 
         }
         public void loadOrder()
         {
-            Order order = new Order();
-            GridView_Order.DataSource = order.selectOrder();
+            //OrderList.Order order = new OrderList.Order();
+            OrderList orderlist = new OrderList();
+            orderlist.selectOrders();
+            GridView_Order.DataSource = orderlist.Values;
             GridView_Order.DataBind();
         }
         void fetchUser()
         {
-            user = new User();
-            DropDownList3.DataSource = user.selectUser();
+            //user = new UserDic.User();
+            users = new UserDic();
+            users.selectUsers();
+            DropDownList3.DataSource = users.Values;
             DropDownList3.DataTextField = "FirstName";
             DropDownList3.DataValueField = "UserID";
             DropDownList3.DataBind();
@@ -53,25 +60,36 @@ namespace TesWeb1
         void fetchProduct()
         {
             //product = new ProductList.Product();
-            product = new Product();
-            DropDownList1.DataSource = product.selectProduct();
+            products = new ProductList();
+            products.selectProduct();
+            DropDownList1.DataSource = products.Values;
             DropDownList1.DataTextField = "ProductName";
             DropDownList1.DataValueField = "ProductID";
             DropDownList1.DataBind();
         }
-        //void fetchQty()
-        //{
-        //    DropDownList2.DataSource = items;
-        //    DropDownList2.DataTextField = "Text";
-        //    DropDownList2.DataValueField = "Value";
-        //    DropDownList2.DataBind();
-        //}
+        void fetchSelect()
+        {
+            DropDownList2.DataSource = items;
+            DropDownList2.DataTextField = "Text";
+            DropDownList2.DataValueField = "Value";
+            DropDownList2.DataBind();
+        }
+        void fetchType()
+        {
+            //product = new ProductList.Product();
+            products = new ProductList();
+            products.selectType();
+            DropDownList4.DataSource = products.Values;
+            DropDownList4.DataTextField = "TypeName";
+            DropDownList4.DataValueField = "TypeID";
+            DropDownList4.DataBind();
+        }
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int proid = int.Parse(DropDownList1.SelectedValue.ToString());
 
-            product = new Product(proid)
+            ProductList.Product product = new ProductList.Product()
             {
                 ProductID = proid
             };
@@ -103,7 +121,7 @@ namespace TesWeb1
             string userid = DropDownList3.SelectedValue.ToString();
             DateTime ordertime = DateTime.Now;
 
-            Order order = new Order(proid, qty, price, userid, ordertime)
+            OrderList.Order order = new OrderList.Order(proid, qty, price, userid, ordertime)
             {
                 ProductID = proid,
                 OrderQty = qty,
@@ -125,7 +143,38 @@ namespace TesWeb1
 
         protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.sumOrder();
+            string select = DropDownList2.SelectedValue.ToString();
+            if(select == "Type")
+            {
+                Panel3.Visible = true;
+                Panel4.Visible = false;
+                //this.fetchType();
+
+            }
+            else
+            {
+                Panel3.Visible = false;
+                Panel4.Visible = true;
+                //this.fetchProduct();
+
+            }
+        }
+        protected void DropDownList4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.getSelectType();
+        }
+        public void getSelectType()
+        {
+
+            string select = DropDownList2.SelectedValue.ToString();
+            int type = int.Parse(DropDownList4.SelectedValue.ToString());
+            products = new ProductList(select, type)
+            {
+                Select = select,
+                TypeID = type
+            };
+            products.selectProductType();
+            this.fetchProduct();
 
         }
         public void testModal()

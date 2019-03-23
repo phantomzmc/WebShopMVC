@@ -9,7 +9,7 @@ namespace TesWeb1
 {
     public partial class AddCustomer : System.Web.UI.Page
     {
-        User users;
+        UserDic.User users;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -32,7 +32,7 @@ namespace TesWeb1
             string postnumber = postnumber_TextBox.Text.ToString();
             string birthday = Convert.ToString(brithday_TextBox.Text);
 
-            users = new User(userid,firstname, lastname, username, tel, email, gen,numaddress, tambon, amphoe, city, country, postnumber, birthday)
+            users = new UserDic.User (userid,firstname, lastname, username, tel, email, gen,numaddress, tambon, amphoe, city, country, postnumber, birthday)
             {
                 UserID = userid,
                 FirstName = firstname,
@@ -47,7 +47,7 @@ namespace TesWeb1
                 City = city,
                 Country = country,
                 PostNumber = postnumber,
-                BirthDay = birthday
+                BrithDay = birthday
             };
             users.addCustomer();
         }
