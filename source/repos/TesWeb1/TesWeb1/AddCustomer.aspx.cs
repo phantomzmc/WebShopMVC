@@ -10,6 +10,7 @@ namespace TesWeb1
     public partial class AddCustomer : System.Web.UI.Page
     {
         UserDic.User users;
+        UserDic user;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -17,7 +18,7 @@ namespace TesWeb1
 
         public void addUser()
         {
-            string userid = userid_TextBox.Text.ToString();
+            int userid = int.Parse(userid_TextBox.Text.ToString());
             string firstname = firstname_TextBox.Text.ToString();
             string lastname = lastname_TextBox.Text.ToString();
             string username = username_TextBox.Text.ToString();
@@ -32,24 +33,25 @@ namespace TesWeb1
             string postnumber = postnumber_TextBox.Text.ToString();
             string birthday = Convert.ToString(brithday_TextBox.Text);
 
-            users = new UserDic.User (userid,firstname, lastname, username, tel, email, gen,numaddress, tambon, amphoe, city, country, postnumber, birthday)
-            {
-                UserID = userid,
-                FirstName = firstname,
-                LastName = lastname,
-                Username =username,
-                Tel = tel,
-                Email = email,
-                Gender = gen,
-                NumAddress = numaddress,
-                Tambon = tambon,
-                Amphoe = amphoe,
-                City = city,
-                Country = country,
-                PostNumber = postnumber,
-                BrithDay = birthday
-            };
-            users.addCustomer();
+            //users = new UserDic.User (userid,firstname, lastname, username, tel, email, gen,numaddress, tambon, amphoe, city, country, postnumber, birthday)
+            //{
+            //    UserID = userid,
+            //    FirstName = firstname,
+            //    LastName = lastname,
+            //    Username =username,
+            //    Tel = tel,
+            //    Email = email,
+            //    Gender = gen,
+            //    NumAddress = numaddress,
+            //    Tambon = tambon,
+            //    Amphoe = amphoe,
+            //    City = city,
+            //    Country = country,
+            //    PostNumber = postnumber,
+            //    BrithDay = birthday
+            //};
+            user = new UserDic();
+            user.addUsers(userid, firstname, lastname, username, tel, email, gen, numaddress, tambon, amphoe, city, country, postnumber, birthday);
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)

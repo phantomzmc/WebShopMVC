@@ -93,7 +93,7 @@ namespace TesWeb1
             {
                 ProductID = proid
             };
-            product.getProduct();
+            products.getProduct(proid);
             this.sumOrder();
 
         }
@@ -101,31 +101,40 @@ namespace TesWeb1
         {
             if (IsPostBack)
             {
-                DataTable dt = product.getProduct();
+                //products.getProduct(int proid);
+                //DataTable dt = products.getProduct();
                 //int qty = int.Parse(DropDownList2.SelectedValue.ToString());
-                qty = int.Parse(qty_TextBox.Text.ToString());
-                int price = Convert.ToInt32(dt.Rows[0]["ProductPrice"]);
-                int total = price * qty;
-                Label2.Text = dt.Rows[0]["ProductName"].ToString();
-                Label4.Text = qty_TextBox.Text.ToString();
-                Label6.Text = total.ToString();
+                //qty = int.Parse(qty_TextBox.Text.ToString());
+                //int price = Convert.ToInt32(dt.Rows[0]["ProductPrice"]);
+                //int total = price * qty;
+                //Label2.Text = dt.Rows[0]["ProductName"].ToString();
+                //Label4.Text = qty_TextBox.Text.ToString();
+                //Label6.Text = total.ToString();
             }
 
 
         }
         public void addOrders()
         {
-            int proid = int.Parse(DropDownList1.SelectedValue.ToString());
-            qty = int.Parse(qty_TextBox.Text.ToString());
-            int price = int.Parse(Label6.Text.ToString());
-            string userid = DropDownList3.SelectedValue.ToString();
+            //int proid = int.Parse(DropDownList1.SelectedValue.ToString());
+            //qty = int.Parse(qty_TextBox.Text.ToString());
+            //int price = int.Parse(Label6.Text.ToString());
+            //string userid = DropDownList3.SelectedValue.ToString();
+            //DateTime ordertime = DateTime.Now;
+            int proid = 33;
+            int qty = 1;
+            int price = 50;
+            int userid = 1;
             DateTime ordertime = DateTime.Now;
+
+            //OrderList orders = new OrderList();
+            //orders.addOrder(proid, qty, price, userid, ordertime);
 
             OrderList.Order order = new OrderList.Order(proid, qty, price, userid, ordertime)
             {
                 ProductID = proid,
                 OrderQty = qty,
-                OrderPrice =price,
+                OrderPrice = price,
                 UserID = userid,
                 OrderTime = ordertime
             };
@@ -168,12 +177,12 @@ namespace TesWeb1
 
             string select = DropDownList2.SelectedValue.ToString();
             int type = int.Parse(DropDownList4.SelectedValue.ToString());
-            products = new ProductList(select, type)
-            {
-                Select = select,
-                TypeID = type
-            };
-            products.selectProductType();
+            //products = new ProductList(select, type)
+            //{
+            //    Select = select,
+            //    TypeID = type
+            //};
+            //products.selectProductType(select,type);
             this.fetchProduct();
 
         }

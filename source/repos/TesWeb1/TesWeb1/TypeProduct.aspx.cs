@@ -9,7 +9,8 @@ namespace TesWeb1
 {
     public partial class TypeProduct : System.Web.UI.Page
     {
-        ProductList.Product product;
+        ProductList product;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -31,12 +32,13 @@ namespace TesWeb1
             string typename = typename_TextBox.Text.ToString();
             string typedetail = typedetail_TextBox.Text.ToString();
 
-            product = new ProductList.Product(typename, typedetail)
-            {
-                TypeName = typename,
-                TypeDetail = typedetail
-            };
-            product.addTypeProduct();
+            //product = new ProductList(typename, typedetail)
+            //{
+            //    TypeName = typename,
+            //    TypeDetail = typedetail
+            //};
+            product = new ProductList();
+            product.addTypeProduct(typename,typedetail);
             this.loadTypeProduct();
         }
 
@@ -56,11 +58,12 @@ namespace TesWeb1
             GridViewRow row = GridView2.Rows[e.RowIndex];
             int typeid = Convert.ToInt32(GridView2.DataKeys[e.RowIndex].Values[0]);
 
-            product = new ProductList.Product(typeid)
-            {
-                TypeID = typeid
-            };
-            product.deleteTypeProduct();
+            //product = new ProductList.Product(typeid)
+            //{
+            //    TypeID = typeid
+            //};
+            product = new ProductList();
+            product.deleteTypeProduct(typeid);
             this.loadTypeProduct();
         }
 
@@ -71,13 +74,14 @@ namespace TesWeb1
             string typename = (row.FindControl("typename_TextBox") as TextBox).Text;
             string typedetail = (row.FindControl("typedetail_TextBox") as TextBox).Text;
 
-            product = new ProductList.Product(typeid, typename, typedetail)
-            {
-                TypeID = typeid,
-                TypeName = typename,
-                TypeDetail = typedetail
-            };
-            product.editTypeProduct();
+            //product = new ProductList.Product(typeid, typename, typedetail)
+            //{
+            //    TypeID = typeid,
+            //    TypeName = typename,
+            //    TypeDetail = typedetail
+            //};
+            product = new ProductList();
+            product.editTypeProduct(typeid, typename, typedetail);
             GridView2.EditIndex = -1;
             loadTypeProduct();
         }

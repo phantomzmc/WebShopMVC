@@ -11,6 +11,8 @@ namespace TesWeb1
     {
         UserDic users;
         UserDic.User user;
+
+        int Userid;
         protected void Page_Load(object sender, EventArgs e)
         {
             Panel2.Visible = false;
@@ -51,35 +53,38 @@ namespace TesWeb1
             var row = (GridViewRow)btnEdit.NamingContainer;
             int userid = int.Parse(row.Cells[0].Text.ToString());
 
+            int Userid = userid;
             Panel2.Visible = true;
             Panel1.Visible = false;
             this.selectUser(userid);
         }
         public void selectUser(int userid)
         {
-            UserDic users = new UserDic();
-            //user = new UserDic.User(userid)
-            //{
-            //    UserID = userid,
-            //};
-            users.selectCustomer(userid);
-            //var data = users.userdic.Values;
-            //var row = data.Rows[0];
+            CustomerDic customerlist = new CustomerDic();
+            customerlist.selectCustomer(userid);
 
-            firstname_TextBox.Text = user.FirstName.ToString();
-            lastname_TextBox.Text = user.LastName.ToString();
-            email_TextBox.Text = user.Email.ToString();
-            username_TextBox.Text = user.Username.ToString();
-            userid_TextBox.Text = user.UserID.ToString();
-            tel_TextBox.Text = user.Tel.ToString();
-            gender_TextBox.Text = user.Gender.ToString();
-            birthday_TextBox.Text = user.BrithDay.ToString();
-            numaddress_TextBox.Text = user.NumAddress.ToString();
-            tambon_TextBox.Text = user.Tambon.ToString();
-            amphoe_TextBox.Text = user.Amphoe.ToString();
-            city_TextBox.Text = user.City.ToString();
-            country_TextBox.Text = user.Country.ToString();
-            postnumber_TextBox.Text = user.PostNumber.ToString();
+            user = new UserDic.User()
+            {
+                //UserID = Userid,
+            };
+            
+            var data = user.selectCustomer();
+            var row = data.Rows[0];
+
+            firstname_TextBox.Text = row["FirstName"].ToString();
+            lastname_TextBox.Text = row["LastName"].ToString();
+            email_TextBox.Text = row["Email"].ToString();
+            username_TextBox.Text = row["Username"].ToString();
+            userid_TextBox.Text = row["UserID"].ToString();
+            tel_TextBox.Text = row["Tel"].ToString();
+            gender_TextBox.Text = row["Gender"].ToString();
+            birthday_TextBox.Text = row["BrithDay"].ToString();
+            numaddress_TextBox.Text = row["NumAddress"].ToString();
+            tambon_TextBox.Text = row["Tambon"].ToString();
+            amphoe_TextBox.Text = row["Amphoe"].ToString();
+            city_TextBox.Text = row["City"].ToString();
+            country_TextBox.Text = row["Country"].ToString();
+            postnumber_TextBox.Text = row["PostNumber"].ToString();
 
         }
         public void updateUser()
@@ -88,7 +93,7 @@ namespace TesWeb1
             string lastname = lastname_TextBox.Text.ToString();
             string email = email_TextBox.Text.ToString();
             string username = username_TextBox.Text.ToString();
-            string userid = userid_TextBox.Text.ToString();
+            int userid = int.Parse(userid_TextBox.Text.ToString());
             string tel = tel_TextBox.Text.ToString();
             string gender = gender_TextBox.Text.ToString();
             string brithday = birthday_TextBox.Text.ToString();
@@ -99,24 +104,25 @@ namespace TesWeb1
             string country = country_TextBox.Text.ToString();
             string postnumber = postnumber_TextBox.Text.ToString();
 
-            user = new UserDic.User(firstname, lastname, email, username, userid, tel, gender, brithday, numaddress, tambon, amphoe, city, country, postnumber)
-            {
-                FirstName = firstname,
-                LastName = lastname,
-                Email = email,
-                Username = username,
-                UserID = userid,
-                Tel = tel,
-                Gender = gender,
-                BrithDay = brithday,
-                NumAddress = numaddress,
-                Tambon = tambon,
-                Amphoe = amphoe,
-                City = city,
-                Country = country,
-                PostNumber = postnumber
-            };
-            user.editCustomer();
+            //user = new UserDic.User(firstname, lastname, email, username, userid, tel, gender, brithday, numaddress, tambon, amphoe, city, country, postnumber)
+            //{
+            //    FirstName = firstname,
+            //    LastName = lastname,
+            //    Email = email,
+            //    Username = username,
+            //    UserID = userid,
+            //    Tel = tel,
+            //    Gender = gender,
+            //    BrithDay = brithday,
+            //    NumAddress = numaddress,
+            //    Tambon = tambon,
+            //    Amphoe = amphoe,
+            //    City = city,
+            //    Country = country,
+            //    PostNumber = postnumber
+            //};
+            users.editUsers(firstname, lastname, email, username, userid, tel, gender, brithday, numaddress, tambon, amphoe, city, country, postnumber);
+            //user.editCustomer(firstname, lastname, email, username, userid, tel, gender, brithday, numaddress, tambon, amphoe, city, country, postnumber);
         }
         protected void GridViewCustomer_RowEditing(object sender, GridViewEditEventArgs e)
         {

@@ -5,14 +5,19 @@ using System.Web;
 using System.Data;
 using System.Data.SqlClient;
 using System.Collections;
+using NoomLibrary;
 
 namespace TesWeb1
 {
     public class UserDic : IDictionary<int, UserDic.User>
     {
+        private CStatement _statememet;
+
         public Dictionary<int, UserDic.User> userdic = new Dictionary<int, UserDic.User>();
-        SqlConnection con = new SqlConnection(Properties.Resources.ConnectionString);
-        SqlDataAdapter adapter = new SqlDataAdapter();
+        public UserDic()
+        {
+            this._statememet = new CStatement("uspGetUser", "uspAddUser", "uspUpdateUser", "uspDelUser", System.Data.CommandType.StoredProcedure);
+        }
 
         #region imprememt
         public User this[int key] { get => ((IDictionary<int, User>)userdic)[key]; set => ((IDictionary<int, User>)userdic)[key] = value; }
@@ -82,106 +87,156 @@ namespace TesWeb1
 
         #endregion
 
-
         public void selectUsers()
         {
-
-            SqlCommand sql_com = new SqlCommand("uspGetUser", con);
-            DataTable dt = new DataTable();
+            object result = null;
+            CStatementList cstate = new CStatementList(Connection.CSQLConnection);
             try
             {
-                con.Open();
-                adapter.SelectCommand = sql_com;
-                adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-                adapter.Fill(dt);
+                CSQLParameterList plist = new CSQLParameterList();
 
-                foreach(DataRow items in dt.Rows)
-                {
-                    User user = new User()
-                    {
-                        UserID = items["UserID"].ToString(),
-                        FirstName = items["FirstName"].ToString(),
-                        LastName = items["LastName"].ToString(),
-                        Email = items["Email"].ToString(),
-                        Username = items["Username"].ToString(),
-                        Tel = items["Tel"].ToString(),
-                        Gender = items["Gender"].ToString(),
-                        NumAddress = items["NumAddress"].ToString(),
-                        Tambon = items["Tambon"].ToString(),
-                        Amphoe = items["Amphoe"].ToString(),
-                        City = items["City"].ToString(),
-                        Country = items["Country"].ToString(),
-                        PostNumber = items["PostNumber"].ToString(),
-                        BrithDay = items["BrithDay"].ToString()
-      
-                    };
-                    userdic.Add(int.Parse(user.UserID), user);
-                }
-                
+                CSQLDataAdepterList adlist = new CSQLDataAdepterList();
+                CSQLStatementValue csv = new CSQLStatementValue(this._statememet, plist, NoomLibrary.StatementType.Select);
+                adlist.Add(csv);
+                cstate.Open();
+
+                result = cstate.Execute(adlist);
+                DataTable dt = (DataTable)result;
+
+                this.userdic = dt.ToDictionary<int, User>("UserID");
+                cstate.Commit();
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string error = ex.Message;
+                cstate.Rollback();
             }
             finally
             {
-                con.Close();
+                cstate.Close();
             }
-
         }
-
-        public void selectCustomer(int userid)
+        public void editUsers(string firstname,string lastname,string email,string username,int userid,string tel,string gender,string brithday,string numaddress,string tambon,string amphoe,string city,string country,string postnumber)
         {
-            SqlCommand sql_com = new SqlCommand("uspSelectUser", con);
-            DataTable dt = new DataTable();
-            User user = new User();
+            CStatementList cstate = new CStatementList(Connection.CSQLConnection);
             try
             {
-                con.Open();
-                adapter.SelectCommand = sql_com;
-                adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-                adapter.SelectCommand.Parameters.AddWithValue("@UserID", userid);
+                CSQLParameterList plist = new CSQLParameterList();
+                plist.Add("@UserID", DbType.Int32, userid, ParameterDirection.Input);
+                plist.Add("@FirstName", DbType.String, firstname, ParameterDirection.Input);
+                plist.Add("@LastName", DbType.String, lastname, ParameterDirection.Input);
+                plist.Add("@Email", DbType.String, email, ParameterDirection.Input);
+                plist.Add("@Username", DbType.String, username, ParameterDirection.Input);
+                plist.Add("@Tel", DbType.String, tel, ParameterDirection.Input);
+                plist.Add("@Gender", DbType.String, gender, ParameterDirection.Input);
+                plist.Add("@BrithDay", DbType.String, brithday, ParameterDirection.Input);
+                plist.Add("@NumAddress", DbType.String, numaddress, ParameterDirection.Input);
+                plist.Add("@Amphoe", DbType.String, amphoe, ParameterDirection.Input);
+                plist.Add("@Tumbun", DbType.String, tambon, ParameterDirection.Input);
+                plist.Add("@Country", DbType.String, country, ParameterDirection.Input);
+                plist.Add("@City", DbType.String, city, ParameterDirection.Input);
+                plist.Add("@PostNumber", DbType.String, postnumber, ParameterDirection.Input);
 
-                adapter.Fill(dt);
-                adapter.SelectCommand.ExecuteNonQuery();
-                foreach(DataRow items in dt.Rows)
-                {
-                    user = new User()
-                    {
-                        UserID = items["UserID"].ToString(),
-                        FirstName = items["FirstName"].ToString(),
-                        LastName = items["LastName"].ToString(),
-                        Email = items["Email"].ToString(),
-                        Username = items["Username"].ToString(),
-                        Tel = items["Tel"].ToString(),
-                        Gender = items["Gender"].ToString(),
-                        NumAddress = items["NumAddress"].ToString(),
-                        Tambon = items["Tambon"].ToString(),
-                        Amphoe = items["Amphoe"].ToString(),
-                        City = items["City"].ToString(),
-                        Country = items["Country"].ToString(),
-                        PostNumber = items["PostNumber"].ToString(),
-                        BrithDay = items["BrithDay"].ToString()
-                    };
-                    userdic.Add(int.Parse(user.UserID), user);
-                }
+
+                CSQLDataAdepterList adlist = new CSQLDataAdepterList();
+                CSQLStatementValue csv = new CSQLStatementValue(this._statememet, plist, NoomLibrary.StatementType.Update);
+                adlist.Add(csv);
+                cstate.Open();
+
+                cstate.Execute(adlist);
+
+                cstate.Commit();
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string error = ex.Message;
+                cstate.Rollback();
             }
             finally
             {
-                con.Close();
+                cstate.Close();
             }
         }
+        public void addUsers(int userid, string firstname,string lastname,string username,string tel,string email,string gen,string numaddress,string tambon,string amphoe,string city,string country,string postnumber,string birthday)
+        {
+            CStatementList cstate = new CStatementList(Connection.CSQLConnection);
+            try
+            {
+                CSQLParameterList plist = new CSQLParameterList();
+                plist.Add("@UserID", DbType.Int32, userid, ParameterDirection.Input);
+                plist.Add("@FirstName", DbType.String, firstname, ParameterDirection.Input);
+                plist.Add("@LastName", DbType.String, lastname, ParameterDirection.Input);
+                plist.Add("@Email", DbType.String, email, ParameterDirection.Input);
+                plist.Add("@Username", DbType.String, username, ParameterDirection.Input);
+                plist.Add("@Tel", DbType.String, tel, ParameterDirection.Input);
+                plist.Add("@Gender", DbType.String, gen, ParameterDirection.Input);
+                plist.Add("@BrithDay", DbType.String, birthday, ParameterDirection.Input);
+                plist.Add("@NumAddress", DbType.String, numaddress, ParameterDirection.Input);
+                plist.Add("@Amphoe", DbType.String, amphoe, ParameterDirection.Input);
+                plist.Add("@Tumbun", DbType.String, tambon, ParameterDirection.Input);
+                plist.Add("@Country", DbType.String, country, ParameterDirection.Input);
+                plist.Add("@City", DbType.String, city, ParameterDirection.Input);
+                plist.Add("@PostNumber", DbType.String, postnumber, ParameterDirection.Input);
+
+
+                CSQLDataAdepterList adlist = new CSQLDataAdepterList();
+                CSQLStatementValue csv = new CSQLStatementValue(this._statememet, plist, NoomLibrary.StatementType.Insert);
+                adlist.Add(csv);
+                cstate.Open();
+
+                cstate.Execute(adlist);
+
+                cstate.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                string error = ex.Message;
+                cstate.Rollback();
+            }
+            finally
+            {
+                cstate.Close();
+            }
+        }
+        public void delUsers(int userid)
+        {
+            CStatementList cstate = new CStatementList(Connection.CSQLConnection);
+            try
+            {
+                CSQLParameterList plist = new CSQLParameterList();
+                plist.Add("@UserID", DbType.Int32, userid, ParameterDirection.Input);
+
+                CSQLDataAdepterList adlist = new CSQLDataAdepterList();
+                CSQLStatementValue csv = new CSQLStatementValue(this._statememet, plist, NoomLibrary.StatementType.Delete);
+                adlist.Add(csv);
+                cstate.Open();
+
+                cstate.Execute(adlist);
+
+                cstate.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                string error = ex.Message;
+                cstate.Rollback();
+            }
+            finally
+            {
+                cstate.Close();
+            }
+        }
+
 
         public class User
         {
             SqlConnection con = new SqlConnection(Properties.Resources.ConnectionString);
             SqlDataAdapter adapter = new SqlDataAdapter();
 
-            public string UserID { get; set; }
+            public int UserID { get; set; }
             public string FirstName { get; set; }
             public string LastName { get; set; }
             public string Email { get; set; }
@@ -199,9 +254,9 @@ namespace TesWeb1
 
             public User() { }
             public User(int userid) { }
-            public User(string firstname, string lastname, string username, string tel, string email, string gen, string numaddress, string tambon, string amphoe, string city, string country, string postnumber, string birthday) { }
+            public User(string firstname, string lastname, string email, string username, int userid, string tel, string gender, string brithday, string numaddress, string tambon, string amphoe, string city, string country, string postnumber) { }
 
-            public User(string userid, string firstname, string lastname, string username, string tel, string email, string gen, string numaddress, string tambon, string amphoe, string city, string country, string postnumber, string birthday) { }
+            public User(int userid, string firstname, string lastname, string username, string tel, string email, string gen, string numaddress, string tambon, string amphoe, string city, string country, string postnumber, string birthday) { }
 
             //public DataSet selectUser()
             //{
@@ -279,22 +334,23 @@ namespace TesWeb1
                 con.Close();
             }
 
-            //public DataTable selectCustomer()
-            //{
-            //    SqlCommand sql_com = new SqlCommand("uspSelectUser", con);
-            //    adapter.SelectCommand = sql_com;
-            //    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-            //    adapter.SelectCommand.Parameters.AddWithValue("@UserID", UserID);
+            public DataTable selectCustomer()
+            {
+                SqlCommand sql_com = new SqlCommand("uspSelectUser", con);
+                adapter.SelectCommand = sql_com;
+                adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                adapter.SelectCommand.Parameters.AddWithValue("@UserID", UserID);
 
-            //    con.Open();
-            //    DataTable dt = new DataTable();
-            //    adapter.Fill(dt);
-            //    adapter.SelectCommand.ExecuteNonQuery();
-            //    con.Close();
+                con.Open();
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                adapter.SelectCommand.ExecuteNonQuery();
+                con.Close();
 
-            //    return dt;
+                return dt;
 
-            //}
+            }
+
         }
 
     }
