@@ -13,7 +13,10 @@ namespace TesWeb1
         UserDic user;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
 
+            }
         }
 
         public void addUser()
@@ -57,6 +60,18 @@ namespace TesWeb1
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             this.addUser();
+            this.showModal();
+        }
+        public void showModal()
+        {
+            string productname = firstname_TextBox.Text.ToString();
+            string productprice = "productprice";
+            string body = "ได้เพิ่มรายการ " + productname + " ราคา : " + productprice + " บาท ลงในระบบเรียบร้อย";
+            lblModalTitle.Text = "เพิ่มรายการสินค้าเรียบร้อย";
+            lblModalBody.Text = body;
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
+            upModal.Update();
+            Response.Redirect("~/CustomerList.aspx");
         }
     }
 }

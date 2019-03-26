@@ -18,6 +18,8 @@ namespace TesWeb1
         {
             this._statememet = new CStatement("uspSelectUser", "", "", "", System.Data.CommandType.StoredProcedure);
         }
+
+        public DataTable CustomerAll { get; set; }
         public void selectCustomer(int userid)
         {
             object result = null;
@@ -36,6 +38,8 @@ namespace TesWeb1
                 DataTable dt = (DataTable)result;
 
                 this._customer = dt.ToDictionary<int, Customer>("UserID");
+                CustomerAll = dt;
+
                 cstate.Commit();
 
             }

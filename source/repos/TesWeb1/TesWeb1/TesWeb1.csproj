@@ -161,6 +161,7 @@
     </None>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Orderlist.aspx" />
+    <Content Include="PromotionList.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -227,7 +228,7 @@
     <Compile Include="CustomerList.aspx.designer.cs">
       <DependentUpon>CustomerList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="mClass\CustomerList.cs" />
+    <Compile Include="mClass\Customer.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -247,6 +248,7 @@
     </Compile>
     <Compile Include="mClass\Connection.cs" />
     <Compile Include="mClass\Order.cs" />
+    <Compile Include="mClass\Promotion.cs" />
     <Compile Include="mClass\TypeProduct.cs" />
     <Compile Include="Orderlist.aspx.cs">
       <DependentUpon>Orderlist.aspx</DependentUpon>
@@ -256,6 +258,13 @@
       <DependentUpon>Orderlist.aspx</DependentUpon>
     </Compile>
     <Compile Include="mClass\Product.cs" />
+    <Compile Include="PromotionList.aspx.cs">
+      <DependentUpon>PromotionList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PromotionList.aspx.designer.cs">
+      <DependentUpon>PromotionList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

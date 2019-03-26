@@ -11,19 +11,24 @@ namespace TesWeb1
 {
     public class ProductList : IDictionary<int, ProductList.Product>
     {
-        private CStatement _statememet, _statememetType;
+        private CStatement _statememet, _statememetType, _statememetProduct;
 
         public Dictionary<int, ProductList.Product> productlist = new Dictionary<int, ProductList.Product>();
         public ProductList()
         {
             this._statememet = new CStatement("uspGetProduct", "uspAddProduct", "uspUpdateProduct", "uspDelProduct", System.Data.CommandType.StoredProcedure);
             this._statememetType = new CStatement("uspGetTypeProduct", "uspAddTypeProduct", "uspUpdateTypeProduct", "uspDelTypeProduct", System.Data.CommandType.StoredProcedure);
+            this._statememetProduct= new CStatement("uspSelectProduct", "", "", "", System.Data.CommandType.StoredProcedure);
         }
 
         SqlConnection con = new SqlConnection(Properties.Resources.ConnectionString);
         SqlDataAdapter adapter = new SqlDataAdapter();
 
         public ProductList(string select, int typeid) { }
+        public string Select { get; set; }
+        public int TypeID { get; set; }
+        public int ProductID { get; set; }
+        public DataTable ProductAll { get; set; }
 
         #region Imprement
         public Product this[int key]
@@ -343,25 +348,26 @@ namespace TesWeb1
                 cstate.Close();
             }
         }
-        public void getProduct(int productid)
+        public void getProduct(int proid)
         {
             object result = null;
             CStatementList cstate = new CStatementList(Connection.CSQLConnection);
             try
             {
                 CSQLParameterList plist = new CSQLParameterList();
-                plist.Add("@TypeID", DbType.String, productid, ParameterDirection.Input);
+                plist.Add("@ProductID", DbType.Int32, proid, ParameterDirection.Input);
 
                 CSQLDataAdepterList adlist = new CSQLDataAdepterList();
-                CSQLStatementValue csv = new CSQLStatementValue(this._statememetType, plist, NoomLibrary.StatementType.Select);
+                CSQLStatementValue csv = new CSQLStatementValue(this._statememetProduct, plist, NoomLibrary.StatementType.Select);
                 adlist.Add(csv);
                 cstate.Open();
                 
                 result = cstate.Execute(adlist);
                 DataTable dt = (DataTable)result;
 
-                this.productlist = dt.ToDictionary<int, Product>("TypeID");
+                this.productlist = dt.ToDictionary<int, Product>("ProductID");
 
+                ProductAll = dt;
                 cstate.Commit();
 
             }
@@ -373,6 +379,40 @@ namespace TesWeb1
             finally
             {
                 cstate.Close();
+            }
+        }
+        public void selectProductType()
+        {
+            try
+            {
+                SqlCommand sql_com = new SqlCommand("uspSelectProductType2", con);
+                adapter.SelectCommand = sql_com;
+                adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                adapter.SelectCommand.Parameters.AddWithValue("@Select", Select);
+                adapter.SelectCommand.Parameters.AddWithValue("@TypeID", TypeID);
+                con.Open();
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                foreach (DataRow item in dt.Rows)
+                {
+                    Product product = new Product()
+                    {
+                        ProductID = int.Parse(item["ProductName"].ToString()),
+                        ProductName = item["ProductName"].ToString(),
+                        ProductPrice = int.Parse(item["ProductPrice"].ToString()),
+                        ProductDatail = item["ProductDatail"].ToString(),
+                        TypeProduct = int.Parse(item["TypeProduct"].ToString())
+                    };
+                    productlist.Add(product.ProductID, product);
+                }
+            }
+            catch (Exception ex)
+            {
+                string error = ex.Message;
+            }
+            finally
+            {
+                con.Close();
             }
         }
 

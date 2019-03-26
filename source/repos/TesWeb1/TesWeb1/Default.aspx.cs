@@ -10,10 +10,9 @@ namespace TesWeb1
 {
     public partial class _Default : Page
     {
-        ProductList.Product product;
         ProductList products;
-        UserDic.User user;
         UserDic users;
+        PromotionList promotions;
 
         Array items = new[] {
                         new { Text = "ProductName", Value = "" },
@@ -24,16 +23,13 @@ namespace TesWeb1
         protected void Page_Load(object sender, EventArgs e)
         {
             Panel2.Visible = false;
-            Panel3.Visible = false;
-            Panel4.Visible = false;
             if (!IsPostBack)
             {
                 loadOrder();
                 fetchUser();
                 fetchSelect();
-                this.fetchType();
 
-                //fetchProduct();
+                fetchProduct();
                 //fetchQty();
             }
 
@@ -67,22 +63,15 @@ namespace TesWeb1
             DropDownList1.DataValueField = "ProductID";
             DropDownList1.DataBind();
         }
+
         void fetchSelect()
         {
-            DropDownList2.DataSource = items;
-            DropDownList2.DataTextField = "Text";
-            DropDownList2.DataValueField = "Value";
+            PromotionList promotions = new PromotionList();
+            promotions.selectPromotion();
+            DropDownList2.DataSource = promotions.Values;
+            DropDownList2.DataTextField = "PromotionName";
+            DropDownList2.DataValueField = "PromotionID";
             DropDownList2.DataBind();
-        }
-        void fetchType()
-        {
-            //product = new ProductList.Product();
-            products = new ProductList();
-            products.selectType();
-            DropDownList4.DataSource = products.Values;
-            DropDownList4.DataTextField = "TypeName";
-            DropDownList4.DataValueField = "TypeID";
-            DropDownList4.DataBind();
         }
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
@@ -93,52 +82,49 @@ namespace TesWeb1
             {
                 ProductID = proid
             };
+            ProductList products = new ProductList();
             products.getProduct(proid);
-            this.sumOrder();
+            DataTable dt = products.ProductAll;
+            this.sumOrder(dt);
 
         }
-        public void sumOrder()
+        public void sumOrder(DataTable productall)
         {
+            DataTable dt = productall;
             if (IsPostBack)
             {
-                //products.getProduct(int proid);
-                //DataTable dt = products.getProduct();
+                
                 //int qty = int.Parse(DropDownList2.SelectedValue.ToString());
-                //qty = int.Parse(qty_TextBox.Text.ToString());
-                //int price = Convert.ToInt32(dt.Rows[0]["ProductPrice"]);
-                //int total = price * qty;
-                //Label2.Text = dt.Rows[0]["ProductName"].ToString();
-                //Label4.Text = qty_TextBox.Text.ToString();
-                //Label6.Text = total.ToString();
+                qty = int.Parse(qty_TextBox.Text.ToString());
+                int price = Convert.ToInt32(dt.Rows[0]["ProductPrice"]);
+                int total = price * qty;
+                Label2.Text = dt.Rows[0]["ProductName"].ToString();
+                Label4.Text = qty_TextBox.Text.ToString();
+                Label6.Text = total.ToString();
             }
 
 
         }
         public void addOrders()
         {
-            //int proid = int.Parse(DropDownList1.SelectedValue.ToString());
-            //qty = int.Parse(qty_TextBox.Text.ToString());
-            //int price = int.Parse(Label6.Text.ToString());
-            //string userid = DropDownList3.SelectedValue.ToString();
-            //DateTime ordertime = DateTime.Now;
-            int proid = 33;
-            int qty = 1;
-            int price = 50;
-            int userid = 1;
+            int proid = int.Parse(DropDownList1.SelectedValue.ToString());
+            qty = int.Parse(qty_TextBox.Text.ToString());
+            int price = int.Parse(Label6.Text.ToString());
+            int userid = int.Parse(DropDownList3.SelectedValue.ToString());
             DateTime ordertime = DateTime.Now;
 
-            //OrderList orders = new OrderList();
-            //orders.addOrder(proid, qty, price, userid, ordertime);
+            OrderList orders = new OrderList();
+            orders.addOrder(proid, qty, price, userid, ordertime);
 
-            OrderList.Order order = new OrderList.Order(proid, qty, price, userid, ordertime)
-            {
-                ProductID = proid,
-                OrderQty = qty,
-                OrderPrice = price,
-                UserID = userid,
-                OrderTime = ordertime
-            };
-            order.addOrder();
+            //OrderList.Order order = new OrderList.Order(proid, qty, price, userid, ordertime)
+            //{
+            //    ProductID = proid,
+            //    OrderQty = qty,
+            //    OrderPrice = price,
+            //    UserID = userid,
+            //    OrderTime = ordertime
+            //};
+            //order.addOrder();
             this.testModal();
             this.loadOrder();
         }
@@ -146,46 +132,17 @@ namespace TesWeb1
         protected void addOrder_Click(object sender, EventArgs e)
         {
             this.addOrders();
-            Panel2.Visible = true;
-
         }
 
         protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string select = DropDownList2.SelectedValue.ToString();
-            if(select == "Type")
-            {
-                Panel3.Visible = true;
-                Panel4.Visible = false;
-                //this.fetchType();
+            promotions = new PromotionList();
 
-            }
-            else
-            {
-                Panel3.Visible = false;
-                Panel4.Visible = true;
-                //this.fetchProduct();
-
-            }
+            int promotionid = int.Parse(DropDownList2.SelectedValue.ToString());
+            promotions.getPromotion(promotionid);
+            
         }
-        protected void DropDownList4_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.getSelectType();
-        }
-        public void getSelectType()
-        {
 
-            string select = DropDownList2.SelectedValue.ToString();
-            int type = int.Parse(DropDownList4.SelectedValue.ToString());
-            //products = new ProductList(select, type)
-            //{
-            //    Select = select,
-            //    TypeID = type
-            //};
-            //products.selectProductType(select,type);
-            this.fetchProduct();
-
-        }
         public void testModal()
         {
             string productname = "productname";
@@ -195,6 +152,7 @@ namespace TesWeb1
             lblModalBody.Text = body;
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
             upModal.Update();
+            Panel2.Visible = true;
         }
     }
 }

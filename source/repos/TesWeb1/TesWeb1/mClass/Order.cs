@@ -63,7 +63,7 @@ namespace TesWeb1
                 plist.Add("@OrderQty", DbType.Int32, qty, ParameterDirection.Input);
                 plist.Add("@OrderPrice", DbType.Int32, price, ParameterDirection.Input);
                 plist.Add("@UserID", DbType.Int32, userid, ParameterDirection.Input);
-                plist.Add("@OrderTime", DbType.Int32, ordertime, ParameterDirection.Input);
+                plist.Add("@OrderTime", DbType.DateTime, ordertime, ParameterDirection.Input);
 
                 CSQLDataAdepterList adlist = new CSQLDataAdepterList();
                 CSQLStatementValue csv = new CSQLStatementValue(this._statememet, plist, NoomLibrary.StatementType.Insert);
@@ -94,6 +94,7 @@ namespace TesWeb1
             try
             {
                 CSQLParameterList plist = new CSQLParameterList();
+
                 plist.Add("@ProductID", DbType.Int32, proid, ParameterDirection.Input);
                 plist.Add("@OrderQty", DbType.Int32, qty, ParameterDirection.Input);
                 plist.Add("@OrderPrice", DbType.Int32, price, ParameterDirection.Input);

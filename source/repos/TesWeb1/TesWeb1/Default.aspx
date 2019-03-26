@@ -54,25 +54,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <asp:Panel ID="Panel3" runat="server">
-                                            <div style="padding : 20px;">
-                                                <div class="form-group">
-                                                    <asp:Label runat="server" Text="Type Name : "
-                                                        CssClass="control-label col-sm-2">
-                                                    </asp:Label>
-                                                    <div class="col-sm-8">
-                                                        <asp:DropDownList ID="DropDownList4" runat="server"
-                                                            CssClass="form-control" AutoPostBack="true"
-                                                            OnSelectedIndexChanged="DropDownList4_SelectedIndexChanged">
-                                                        </asp:DropDownList>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </asp:Panel>
                                         <asp:Panel ID="Panel4" runat="server">
                                             <div style="padding : 20px;">
                                                 <div class="form-group">
-                                                    <asp:Label runat="server" Text="Product Name : "
+                                                    <asp:Label runat="server" Text="Product Name1 : "
                                                         CssClass="control-label col-sm-2">
                                                     </asp:Label>
                                                     <div class="col-sm-8">
@@ -80,6 +65,14 @@
                                                             CssClass="form-control" AutoPostBack="true"
                                                             OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
                                                         </asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </asp:Panel>
+                                         <asp:Panel ID="Panel5" runat="server">
+                                            <div style="padding : 20px;">
+                                                <div class="form-group">
+                                                    <div class="col-sm-8">
                                                     </div>
                                                 </div>
                                             </div>
@@ -101,6 +94,14 @@
                                                 <asp:Label ID="Label3" runat="server" Text="Qty
                                         : " CssClass="control-label col-sm-1"></asp:Label>
                                                 <asp:Label ID="Label4" runat="server" Text=""
+                                                    CssClass="control-label col-sm-3">
+                                                </asp:Label>
+                                            </div>
+                                            <div class="row">
+                                                <asp:Label ID="Label8" runat="server" Text="Discount : "
+                                                    CssClass="control-label col-sm-1">
+                                                </asp:Label>
+                                                <asp:Label ID="Label9" runat="server" Text=""
                                                     CssClass="control-label col-sm-3">
                                                 </asp:Label>
                                             </div>

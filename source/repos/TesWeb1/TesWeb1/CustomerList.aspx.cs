@@ -11,6 +11,7 @@ namespace TesWeb1
     {
         UserDic users;
         UserDic.User user;
+        CustomerDic customer;
 
         int Userid;
         protected void Page_Load(object sender, EventArgs e)
@@ -35,6 +36,7 @@ namespace TesWeb1
 
         public void testModal()
         {
+            user = new UserDic.User();
             string body = "แก้ไขข้อมูลของ" +user.FirstName+"เรียบร้อย";
             lblModalTitle.Text = "แก้ไขข้อมูลเรียบร้อย";
             lblModalBody.Text = body;
@@ -63,12 +65,7 @@ namespace TesWeb1
             CustomerDic customerlist = new CustomerDic();
             customerlist.selectCustomer(userid);
 
-            user = new UserDic.User()
-            {
-                //UserID = Userid,
-            };
-            
-            var data = user.selectCustomer();
+            var data = customerlist.CustomerAll;
             var row = data.Rows[0];
 
             firstname_TextBox.Text = row["FirstName"].ToString();
@@ -121,6 +118,7 @@ namespace TesWeb1
             //    Country = country,
             //    PostNumber = postnumber
             //};
+            users = new UserDic();
             users.editUsers(firstname, lastname, email, username, userid, tel, gender, brithday, numaddress, tambon, amphoe, city, country, postnumber);
             //user.editCustomer(firstname, lastname, email, username, userid, tel, gender, brithday, numaddress, tambon, amphoe, city, country, postnumber);
         }

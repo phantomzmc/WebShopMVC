@@ -15,12 +15,12 @@
                         <div class="col-sm-12 col-md-12 col-xs-12">
                             <div class="form-group col-sm-6 col-md-6">
                                 <asp:Label ID="Label1" runat="server" Text="FirstName"></asp:Label>
-                                <asp:TextBox ID="firstname_TextBox" runat="server" CssClass="form-control">
+                                <asp:TextBox ID="firstname_TextBox" runat="server" CssClass="form-control" placeholder="Firstname">
                                 </asp:TextBox>
                             </div>
                             <div class="form-group col-sm-6 col-md-6">
                                 <asp:Label ID="Label2" runat="server" Text="LastName"></asp:Label>
-                                <asp:TextBox ID="lastname_TextBox" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="lastname_TextBox" runat="server" CssClass="form-control" placeholder="Lastname"></asp:TextBox>
                             </div>
                         </div>
                     </div>
@@ -28,15 +28,15 @@
                         <div class="col-sm-12 col-md-12 col-xs-12">
                             <div class="form-group col-sm-4 col-md-4">
                                 <asp:Label ID="Label3" runat="server" Text="Username"></asp:Label>
-                                <asp:TextBox ID="username_TextBox" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="username_TextBox" runat="server" CssClass="form-control" placeholder="Username"></asp:TextBox>
                             </div>
                             <div class="form-group col-sm-4 col-md-4">
                                 <asp:Label ID="Label4" runat="server" Text="Email"></asp:Label>
-                                <asp:TextBox ID="email_TextBox" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="email_TextBox" runat="server" CssClass="form-control" placeholder="Email"></asp:TextBox>
                             </div>
                             <div class="form-group col-sm-4 col-md-4">
                                 <asp:Label ID="Label5" runat="server" Text="Tel"></asp:Label>
-                                <asp:TextBox ID="tel_TextBox" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="tel_TextBox" runat="server" CssClass="form-control" placeholder="Tel"></asp:TextBox>
                             </div>
                         </div>
                     </div>
@@ -106,4 +106,30 @@
             </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>
+      <!-- Bootstrap Modal Dialog -->
+                <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <asp:UpdatePanel ID="upModal" runat="server" ChildrenAsTriggers="false"
+                            UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="modal-content" style="font-family : 'Kanit';">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title">
+                                            <asp:Label ID="lblModalTitle" runat="server" Text=""></asp:Label>
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <asp:Label ID="lblModalBody" runat="server" Text=""></asp:Label>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-info" data-dismiss="modal"
+                                            aria-hidden="true">Close</button>
+                                    </div>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
+                </div>
 </asp:Content>
