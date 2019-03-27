@@ -72,6 +72,19 @@
                         <div class="col-md-2"></div>
                     </div>
                     <div class="row">
+                        <div class="form-group">
+                            <div class="col-sm-2 col-md-2 col-xs-2">
+                                <asp:Label ID="Label1" runat="server" Text="Search Product : "></asp:Label>
+                            </div>
+                            <div class="col-sm-8 col-md-8 col-xs-8">
+                                <asp:TextBox ID="keySearch_TextBox" runat="server" CssClass="form-control" placeholder="Productname"></asp:TextBox>
+                            </div>
+                            <div class="col-sm-2 col-md-2 col-xs-2">
+                                <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-info btn-block" OnClick="btnSearch_Click"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="column" style="padding-top : 20px;padding : 20px; font-family :'Kanit';">
                             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="table"
                                 BorderWidth="0px" GridLines="None" 

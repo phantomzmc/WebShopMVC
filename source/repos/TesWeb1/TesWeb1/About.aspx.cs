@@ -9,7 +9,6 @@ namespace TesWeb1
 {
     public partial class About : Page
     {
-        ProductList.Product product;
         ProductList products;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -22,8 +21,6 @@ namespace TesWeb1
         }
         public void getProduct()
         {
-            //product = new Product();
-            //GridView1.DataSource = product.selectProduct();
             products = new ProductList();
             products.selectProduct();
             GridView1.DataSource = products.Values;
@@ -46,15 +43,6 @@ namespace TesWeb1
             string detail = productdetail_textbox.Text.ToString();
             int type = int.Parse(DropDownList_TypeProduct.SelectedValue.ToString());
 
-            //product = new ProductList.Product(name, price, detail, type)
-            //product = new Product(name, price, detail, type)
-
-            //{
-            //    ProductName = name,
-            //    ProductPrice = price,
-            //    ProductDatail = detail,
-            //    TypeProduct = type
-            //};
             products = new ProductList();
             products.addProduct(name,price,detail,type);
             //int res = product.addProduct();
@@ -69,16 +57,9 @@ namespace TesWeb1
             var row = (GridViewRow)btnEdit.NamingContainer;
             int id = int.Parse(row.Cells[0].Text);
 
-
-            //text1.Text = id.ToString();
         }
 
-        
-
-        protected void cancel_Click(object sender, EventArgs e)
-        {
-
-        }
+        protected void cancel_Click(object sender, EventArgs e){}
 
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
         {
@@ -96,16 +77,6 @@ namespace TesWeb1
             string productdetail = (row.FindControl("editProductDetail_TextBox") as TextBox).Text;
             int type_product = 1;
 
-            //product = new ProductList.Product(productid, productname, productprice, productdetail, type_product)
-            //product = new Product(productid,productname, productprice, productdetail, type_product)
-            //{
-            //    ProductID = productid,
-            //    ProductName = productname,
-            //    ProductPrice = productprice,
-            //    ProductDatail = productdetail,
-            //    TypeProduct = type_product
-
-            //};
             products = new ProductList();
             products.editProduct(productid,productname,productprice,productdetail,type_product);
             GridView1.EditIndex = -1;
@@ -122,12 +93,6 @@ namespace TesWeb1
             int productid = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values[0]);
             products = new ProductList();
             products.delProduct(productid);
-
-            //product = new ProductList.Product(productid)
-            //{
-            //    ProductID = productid
-            //};
-            //product.deleteProduct();
             this.getProduct();
         }
 
@@ -140,6 +105,24 @@ namespace TesWeb1
             lblModalBody.Text = body;
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
             upModal.Update();
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            string key = keySearch_TextBox.Text.ToString();
+
+            products = new ProductList();
+            products.searchProduct(key);
+            try
+            {
+                GridView1.DataSource = products.Values;
+                GridView1.DataBind();
+            }
+            catch(Exception)
+            {
+                this.testModal();
+            }
+
         }
     }
 }

@@ -10,7 +10,7 @@ namespace TesWeb1
 {
     public class PromotionList : IDictionary<int, PromotionList.Promotion>
     {
-        private CStatement _statememet, _statememet2;
+        private CStatement _statememet, _statememet2,_searchPromotion;
 
         public Dictionary<int, PromotionList.Promotion> _promotionlist = new Dictionary<int, Promotion>();
 
@@ -18,6 +18,7 @@ namespace TesWeb1
         {
             this._statememet = new CStatement("uspGetPromotion", "uspAddPromotion", "uspUpdatePromotion", "uspDelPromotion", System.Data.CommandType.StoredProcedure);
             this._statememet2 = new CStatement("uspSelectPromotion", "", "", "", System.Data.CommandType.StoredProcedure);
+            this._searchPromotion = new CStatement("uspSearchPromotion", "", "", "", System.Data.CommandType.StoredProcedure);
 
         }
         public DataTable PromotionAll { get; set; }
@@ -160,6 +161,38 @@ namespace TesWeb1
                 result = cstate.Execute(adlist);
                 DataTable dt = (DataTable)result;
 
+                //this._promotionlist = dt.ToDictionary<int, Promotion>("PromotionID");
+                PromotionAll = dt;
+                cstate.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                string error = ex.Message;
+                cstate.Rollback();
+            }
+            finally
+            {
+                cstate.Close();
+            }
+        }
+        public void searchPromotion(string keyname)
+        {
+            object result = null;
+            CStatementList cstate = new CStatementList(Connection.CSQLConnection);
+            try
+            {
+                CSQLParameterList plist = new CSQLParameterList();
+                plist.Add("@KeyName", DbType.String, keyname, ParameterDirection.Input);
+
+                CSQLDataAdepterList adlist = new CSQLDataAdepterList();
+                CSQLStatementValue csv = new CSQLStatementValue(this._searchPromotion, plist, NoomLibrary.StatementType.Select);
+                adlist.Add(csv);
+                cstate.Open();
+
+                result = cstate.Execute(adlist);
+                DataTable dt = (DataTable)result;
+
                 this._promotionlist = dt.ToDictionary<int, Promotion>("PromotionID");
                 PromotionAll = dt;
                 cstate.Commit();
@@ -249,9 +282,13 @@ namespace TesWeb1
             public int PromotionID { get; set; }
             public string PromotionName { get; set; }
             public string PromotionDiscount { get; set; }
-            public int PromotionType { get; set; }
+            public string PromotionType { get; set; }
 
-            public Promotion() { }
+            public Promotion(string promodis,string promotype,string proname) { }
+
+            public Promotion()
+            {
+            }
         }
     }
     

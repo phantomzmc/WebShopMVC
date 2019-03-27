@@ -9,7 +9,6 @@ namespace TesWeb1
 {
     public partial class AddCustomer : System.Web.UI.Page
     {
-        UserDic.User users;
         UserDic user;
         protected void Page_Load(object sender, EventArgs e)
         {

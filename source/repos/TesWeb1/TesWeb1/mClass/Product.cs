@@ -11,7 +11,7 @@ namespace TesWeb1
 {
     public class ProductList : IDictionary<int, ProductList.Product>
     {
-        private CStatement _statememet, _statememetType, _statememetProduct;
+        private CStatement _statememet, _statememetType, _statememetProduct, _searchProduct;
 
         public Dictionary<int, ProductList.Product> productlist = new Dictionary<int, ProductList.Product>();
         public ProductList()
@@ -19,6 +19,8 @@ namespace TesWeb1
             this._statememet = new CStatement("uspGetProduct", "uspAddProduct", "uspUpdateProduct", "uspDelProduct", System.Data.CommandType.StoredProcedure);
             this._statememetType = new CStatement("uspGetTypeProduct", "uspAddTypeProduct", "uspUpdateTypeProduct", "uspDelTypeProduct", System.Data.CommandType.StoredProcedure);
             this._statememetProduct= new CStatement("uspSelectProduct", "", "", "", System.Data.CommandType.StoredProcedure);
+            this._searchProduct = new CStatement("uspSearchProduct", "", "", "", System.Data.CommandType.StoredProcedure);
+
         }
 
         SqlConnection con = new SqlConnection(Properties.Resources.ConnectionString);
@@ -415,6 +417,40 @@ namespace TesWeb1
                 con.Close();
             }
         }
+        public void searchProduct(string keyname)
+        {
+            object result = null;
+            CStatementList cstate = new CStatementList(Connection.CSQLConnection);
+            try
+            {
+                CSQLParameterList plist = new CSQLParameterList();
+                plist.Add("@KeyName", DbType.String, keyname, ParameterDirection.Input);
+
+                CSQLDataAdepterList adlist = new CSQLDataAdepterList();
+                CSQLStatementValue csv = new CSQLStatementValue(this._searchProduct, plist, NoomLibrary.StatementType.Select);
+                adlist.Add(csv);
+                cstate.Open();
+
+                result = cstate.Execute(adlist);
+                DataTable dt = (DataTable)result;
+
+                this.productlist = dt.ToDictionary<int, Product>("ProductID");
+
+                ProductAll = dt;
+                cstate.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                string error = ex.Message;
+                cstate.Rollback();
+            }
+            finally
+            {
+                cstate.Close();
+            }
+        }
+
 
         public class Product
         {

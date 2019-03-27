@@ -74,7 +74,10 @@ namespace TesWeb1
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-
+            int promoid = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values[0]);
+            promotions = new PromotionList();
+            promotions.deletePromotion(promoid);
+            this.selectPromotion();
         }
 
         protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -87,14 +90,26 @@ namespace TesWeb1
                 string promotiondiscount = (row.FindControl("editdiscount_TextBox") as TextBox).Text;
                 int typepromotion = int.Parse((row.FindControl("edittype_TextBox") as TextBox).Text);
 
-                promotions = new PromotionList();
-                promotions.editPromotion(promotionid, promotionname, promotiondiscount, typepromotion);
+                if(promotionname == "" || promotionname == null)
+                {
+                    this.testModal("PromotionName", "");
+                }
+                else if(promotiondiscount == "" || promotiondiscount == null)
+                {
+                    this.testModal("PromotionDiscount", "");
+                }
+                else
+                {
+                    promotions = new PromotionList();
+                    promotions.editPromotion(promotionid, promotionname, promotiondiscount, typepromotion);
 
-                GridView1.EditIndex = -1;
+                    GridView1.EditIndex = -1;
+                }
             }
             catch(Exception ex)
             {
                 string error = ex.Message;
+                this.testModal("Error", error);
             }
             finally
             {
@@ -104,7 +119,55 @@ namespace TesWeb1
 
         protected void submit_Button_Click(object sender, EventArgs e)
         {
-            this.addPromotion();
+            string name = promotionname_TextBox.Text.ToString();
+            int type = int.Parse(DropDownList1.SelectedValue.ToString());
+            string discount = promotiondiscount_TextBox.Text.ToString();
+
+            try
+            {
+                if (name == "" || name == null)
+                {
+                    this.testModal("PromotionName", "");
+                }
+                else if (discount == "" || discount == null) 
+                {
+                    this.testModal("PromotionDiscount", "");
+                }
+                else
+                {
+                    this.addPromotion();
+                }
+            }
+            catch(Exception ex)
+            {
+                string error = ex.Message;
+                this.testModal("Error", error);
+            }
+        }
+
+        public void testModal(string text1 ,string text2)
+        {
+            string body = "place input"+ text1 + " or  " + text2 + " is legth ";
+            lblModalTitle.Text = "error input";
+            lblModalBody.Text = body;
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
+            upModal.Update();
+        }
+
+        protected void btnProSearch_Click1(object sender, EventArgs e)
+        {
+            string keyname = TextBox1.Text.ToString();
+            promotions = new PromotionList();
+            try
+            {
+                promotions.searchPromotion(keyname);
+                GridView1.DataSource = promotions.Values;
+                GridView1.DataBind();
+            }
+            catch (Exception)
+            {
+                this.selectPromotion();
+            }
         }
     }
 }

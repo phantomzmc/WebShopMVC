@@ -13,11 +13,7 @@ namespace TesWeb1
         ProductList products;
         UserDic users;
         PromotionList promotions;
-
-        Array items = new[] {
-                        new { Text = "ProductName", Value = "" },
-                        new { Text = "Typename", Value = "Type" }                      
-        };
+        PromotionList.Promotion promo;
 
         int qty = 1;
         protected void Page_Load(object sender, EventArgs e)
@@ -90,20 +86,29 @@ namespace TesWeb1
         }
         public void sumOrder(DataTable productall)
         {
+            promotions = new PromotionList();
             DataTable dt = productall;
-            if (IsPostBack)
+
+            qty = int.Parse(qty_TextBox.Text.ToString());
+            int price = Convert.ToInt32(dt.Rows[0]["ProductPrice"]);
+            int total = price * qty;
+            string type = Label10.Text.ToString();
+            int discount = int.Parse(Label9.Text.ToString());
+
+            if (type == "Bath")
             {
-                
-                //int qty = int.Parse(DropDownList2.SelectedValue.ToString());
-                qty = int.Parse(qty_TextBox.Text.ToString());
-                int price = Convert.ToInt32(dt.Rows[0]["ProductPrice"]);
-                int total = price * qty;
-                Label2.Text = dt.Rows[0]["ProductName"].ToString();
-                Label4.Text = qty_TextBox.Text.ToString();
-                Label6.Text = total.ToString();
+                    total = (total - discount);
             }
+            else if(type == "Percent")
+            {
+                    total = ((total * 100) / 100 + discount);
+            }
+                //int qty = int.Parse(DropDownList2.SelectedValue.ToString());
 
 
+            Label2.Text = dt.Rows[0]["ProductName"].ToString();
+            Label4.Text = qty_TextBox.Text.ToString();
+            Label6.Text = total.ToString();
         }
         public void addOrders()
         {
@@ -116,15 +121,6 @@ namespace TesWeb1
             OrderList orders = new OrderList();
             orders.addOrder(proid, qty, price, userid, ordertime);
 
-            //OrderList.Order order = new OrderList.Order(proid, qty, price, userid, ordertime)
-            //{
-            //    ProductID = proid,
-            //    OrderQty = qty,
-            //    OrderPrice = price,
-            //    UserID = userid,
-            //    OrderTime = ordertime
-            //};
-            //order.addOrder();
             this.testModal();
             this.loadOrder();
         }
@@ -137,10 +133,21 @@ namespace TesWeb1
         protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
         {
             promotions = new PromotionList();
-
             int promotionid = int.Parse(DropDownList2.SelectedValue.ToString());
             promotions.getPromotion(promotionid);
-            
+            var dt = promotions.PromotionAll;
+            var row = dt.Rows[0];
+            string distype = row["PromotionType"].ToString();
+            if(distype == "1")
+            {
+                Label10.Text = "Bath";
+            }
+            else if(distype == "2")
+            {
+                Label10.Text = "Percent";
+            }
+            Label9.Text = row["PromotionDiscount"].ToString();
+
         }
 
         public void testModal()

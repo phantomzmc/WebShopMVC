@@ -102,7 +102,10 @@
                                                     CssClass="control-label col-sm-1">
                                                 </asp:Label>
                                                 <asp:Label ID="Label9" runat="server" Text=""
-                                                    CssClass="control-label col-sm-3">
+                                                    CssClass="control-label col-sm-2">
+                                                </asp:Label>
+                                                <asp:Label ID="Label10" runat="server" Text=""
+                                                    CssClass="control-label col-sm-1">
                                                 </asp:Label>
                                             </div>
                                             <div class="row">

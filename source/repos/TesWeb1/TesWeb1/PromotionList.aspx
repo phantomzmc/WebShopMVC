@@ -15,7 +15,8 @@
                                             <asp:Label ID="Label1" runat="server" Text="PromotionName : "
                                                 CssClass="col-sm-4 col-md-4"></asp:Label>
                                             <div class="col-sm-8 col-md-8">
-                                                <asp:TextBox ID="promotionname_TextBox" runat="server" CssClass="form-control">
+                                                <asp:TextBox ID="promotionname_TextBox" runat="server"
+                                                    CssClass="form-control">
                                                 </asp:TextBox>
                                             </div>
                                         </div>
@@ -31,14 +32,16 @@
                                             <asp:Label ID="Label3" runat="server" Text="PromotionDiscount : "
                                                 CssClass="col-sm-4 col-md-4"></asp:Label>
                                             <div class="col-sm-8 col-md-8">
-                                                <asp:TextBox ID="promotiondiscount_TextBox" runat="server" CssClass="form-control">
+                                                <asp:TextBox ID="promotiondiscount_TextBox" runat="server"
+                                                    CssClass="form-control">
                                                 </asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="row" style="padding : 20px;">
                                             <div class="col-sm-6 col-md-6 col-xs-6">
                                                 <asp:Button ID="submit_Button" runat="server" Text="Submit"
-                                                    CssClass="btn btn-success btn-block" onclick="submit_Button_Click"/>
+                                                    CssClass="btn btn-success btn-block"
+                                                    onclick="submit_Button_Click" />
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-xs-6">
                                                 <asp:Button ID="cancel_Button" runat="server" Text="Cancel"
@@ -51,25 +54,71 @@
                             <div class="col-sm-2 col-md-2"></div>
                         </div>
                     </div>
+
+                </div>
+                <div class="container">
+                   <div class="row">
+                        <div class="form-group">
+                        <div class="col-sm-2 col-md-2 col-xs-2">
+                            <asp:Label ID="Label5" runat="server" Text="Search Promotion :"></asp:Label>
+                        </div>
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control"></asp:TextBox>
+                        </div>
+                        <div class="col-sm-2 col-md-2 col-xs-2">
+                            <asp:Button  ID="btnProSearch" runat="server" Text="Search" CssClass="btn btn-info btn-block" onclick="btnProSearch_Click1" />
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <asp:UpdatePanel ID="upModal" runat="server" ChildrenAsTriggers="false"
+                            UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="modal-content" style="font-family : 'Kanit';">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title">
+                                            <asp:Label ID="lblModalTitle" runat="server" Text=""></asp:Label>
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <asp:Label ID="lblModalBody" runat="server" Text=""></asp:Label>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-info" data-dismiss="modal"
+                                            aria-hidden="true">Close</button>
+                                    </div>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
                 </div>
             </asp:Panel>
             <asp:Panel ID="Panel2" runat="server">
                 <div class="container">
-                    <div class="row">
-                        <asp:GridView ID="GridView1" runat="server" CssClass="table"
-                            BorderWidth="0px" GridLines="None" AutoGenerateColumns="False" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" DataKeyNames="PromotionID">
+                    <div class="row" style="margin-top : 20px;">
+                        <asp:GridView ID="GridView1" runat="server" CssClass="table" BorderWidth="0px" GridLines="None"
+                            AutoGenerateColumns="False" OnRowDeleting="GridView1_RowDeleting"
+                            OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating"
+                            OnSelectedIndexChanged="GridView1_SelectedIndexChanged" DataKeyNames="PromotionID">
                             <Columns>
                                 <asp:TemplateField HeaderText="PromotionID">
                                     <EditItemTemplate>
-                                        <asp:TextBox ID="editid_TextBox" runat="server" Text='<%# Bind("PromotionID") %>' CssClass="form-control"></asp:TextBox>
+                                        <asp:TextBox ID="editid_TextBox" runat="server"
+                                            Text='<%# Bind("PromotionID") %>' CssClass="form-control"></asp:TextBox>
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("PromotionID") %>'></asp:Label>
+                                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("PromotionID") %>'>
+                                        </asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="PromotionName">
                                     <EditItemTemplate>
-                                        <asp:TextBox ID="editname_TextBox" runat="server" Text='<%# Bind("PromotionName") %>' CssClass="form-control"></asp:TextBox>
+                                        <asp:TextBox ID="editname_TextBox" runat="server"
+                                            Text='<%# Bind("PromotionName") %>' CssClass="form-control"></asp:TextBox>
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="Label3" runat="server" Text='<%# Bind("PromotionName") %>'>
@@ -79,7 +128,8 @@
                                 <asp:TemplateField HeaderText="PromotionDiscount">
                                     <EditItemTemplate>
                                         <asp:TextBox ID="editdiscount_TextBox" runat="server"
-                                            Text='<%# Bind("PromotionDiscount") %>' CssClass="form-control"></asp:TextBox>
+                                            Text='<%# Bind("PromotionDiscount") %>' CssClass="form-control">
+                                        </asp:TextBox>
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="Label2" runat="server" Text='<%# Bind("PromotionDiscount") %>'>
@@ -88,7 +138,8 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="PromotionType">
                                     <EditItemTemplate>
-                                        <asp:TextBox ID="edittype_TextBox" runat="server" Text='<%# Bind("PromotionType") %>' CssClass="form-control"></asp:TextBox>
+                                        <asp:TextBox ID="edittype_TextBox" runat="server"
+                                            Text='<%# Bind("PromotionType") %>' CssClass="form-control"></asp:TextBox>
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("PromotionType") %>'>
@@ -97,11 +148,12 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Edit">
                                     <EditItemTemplate>
-                                        <asp:Button ID="btneditSubmit" runat="server" Text="Submit" CssClass="btn btn-success" CommandName="UPDATE"/>
+                                        <asp:Button ID="btneditSubmit" runat="server" Text="Submit"
+                                            CssClass="btn btn-success" CommandName="UPDATE" />
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:Button ID="btnEdit" runat="server" Text="Edit"
-                                            CssClass="btn btn-warning" CommandName="Edit" />
+                                        <asp:Button ID="btnEdit" runat="server" Text="Edit" CssClass="btn btn-warning"
+                                            CommandName="Edit" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Delete">
@@ -110,7 +162,6 @@
                                             CssClass="btn btn-danger" CommandName="DELETE" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
-
                             </Columns>
                         </asp:GridView>
                     </div>

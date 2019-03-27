@@ -11,9 +11,6 @@ namespace TesWeb1
     {
         UserDic users;
         UserDic.User user;
-        CustomerDic customer;
-
-        int Userid;
         protected void Page_Load(object sender, EventArgs e)
         {
             Panel2.Visible = false;
