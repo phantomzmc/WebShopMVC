@@ -1,0 +1,62 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="Purchase.Site1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Homepage</title>
+    <link href="~/Styles/default.css" rel="stylesheet" type="text/css" media="screen" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+<div id="header" >
+    <div id="logo">
+		<table  align="right">
+                    <tr>
+                        <td align="right" >
+                            </td>
+        <td style="padding-left:5px">
+        <a href="../_Form/_ChangePassowrd.aspx" style="background-color:White">เปลี่ยนรหัสผ่าน</a>
+        </td>
+                    </tr>
+                </table>
+
+	</div>
+    <div id='cssmenu1' >
+<ul>
+   <li><a href="../_Form/_MainForm.aspx" style="padding-top:8px; padding-bottom:10px; padding-left:5px; padding-right:5px;" ><span><img src="../Image/home.png"></img></span></a></li>
+   <li ID='PO' runat="server"><a href="../_Form/_PurchaseForm.aspx?MCNumber=0"><span>ใบสั่งซื้อ</span></a></li>
+   <li ID='SPO' runat="server"><a href="../_Form/_SPurchaseForm.aspx"><span>ค้นหา</span></a></li>
+   <%--<li id='SearchSC' runat="server" class='active has-sub' ><a href='#'><span>ค้นหา</span></a>
+       <ul>
+         <li class='has-sub'><a href="../_Form/_SearchForm.aspx"><span>เสนอราคา</span></a></li>
+         <li class='has-sub'><a href="../_Form/_SearchPSForm.aspx"><span>ลูกค้ามุ่งหวัง</span></a></li>
+         <li class='has-sub'><a href="../_Form/_OutCarForm.aspx"><span>ประวัติการออกรถ</span></a></li>
+         <li class='has-sub'><a href="../_Form/_CancelForm.aspx"><span>ประวัติการยกเลิก</span></a></li>
+       </ul>
+   </li>--%>
+   <li class='last'><a href="../_Form/_LogOutForm.aspx"><span>ออกจากระบบ</span></a></li>
+</ul>
+</div>
+<div align="center">
+    <MARQUEE behavior=alternate direction=left scrollAmount=3 width="4%"><font><<</font></MARQUEE><MARQUEE scrollAmount=1 direction=left width="2%">| | |</MARQUEE><asp:Label ID="UserLogin" runat="server" style="color: #000000" 
+                                ForeColor="Black"></asp:Label><MARQUEE scrollAmount=1 direction=right width="2%">| | |</MARQUEE><MARQUEE behavior=alternate direction=right scrollAmount=3 width="4%"><font>>></font></MARQUEE>
+        
+    </div>
+</div>
+<div id="page" >
+    <form id="form1" runat="server">
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+    </div>
+
+<div id="footer">
+	<p class="copyright">&copy;&nbsp;&nbsp;2016 All Rights Reserved &nbsp;&bull;&nbsp; Design by @Information Technology</p>
+	<p class="link"> </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Purchase.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DBSOURCE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">PurchaseOrder</Value>
+    </Setting>
+    <Setting Name="USERNAME" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">sa</Value>
+    </Setting>
+    <Setting Name="PASSWORD" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">itsystem</Value>
+    </Setting>
+    <Setting Name="HOST" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">192.168.1.186</Value>
+    </Setting>
+    <Setting Name="Port" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1433</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

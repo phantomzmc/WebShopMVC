@@ -1,0 +1,371 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DBFDA219-0DC5-4610-B3A8-BED446D9BDC9}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Purchase</RootNamespace>
+    <AssemblyName>Purchase</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=4.1.60919.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML, Version=0.69.1.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportAppServer.CommLayer, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="DocumentFormat.OpenXml, Version=2.0.5022.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="NoomLibrary, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\NoomLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="About.aspx" />
+    <Content Include="Account\ChangePassword.aspx" />
+    <Content Include="Account\ChangePasswordSuccess.aspx" />
+    <Content Include="Account\Login.aspx" />
+    <Content Include="Account\LoginForm.aspx" />
+    <Content Include="Account\Register.aspx" />
+    <Content Include="Image\add.png" />
+    <Content Include="Image\Backgroup Login.jpg" />
+    <Content Include="Image\Backgroup_Login.png" />
+    <Content Include="Image\bg_Alert.png" />
+    <Content Include="Image\calculator.png" />
+    <Content Include="Image\Calendar.png" />
+    <Content Include="Image\cancel.png" />
+    <Content Include="Image\close.png" />
+    <Content Include="Image\Del.png" />
+    <Content Include="Image\edit.png" />
+    <Content Include="Image\excel.png" />
+    <Content Include="Image\home.png" />
+    <Content Include="Image\img01.gif" />
+    <Content Include="Image\img04.jpg" />
+    <Content Include="Image\key.png" />
+    <Content Include="Image\LOGO ISUZU1.png" />
+    <Content Include="Image\man.png" />
+    <Content Include="Image\print.png" />
+    <Content Include="Image\refresh.png" />
+    <Content Include="Image\save.png" />
+    <Content Include="Image\warning.png" />
+    <Content Include="Styles\default.css" />
+    <Content Include="Styles\Site.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Styles\_Login.css" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="_Form\_LogOutForm.aspx" />
+    <Content Include="_Form\_MainForm.aspx" />
+    <Content Include="_Form\_PurchaseForm.aspx" />
+    <Content Include="_Form\_SPurchaseForm.aspx" />
+    <Content Include="_ReportForm\Rpt_PurchaseForm.aspx" />
+    <Content Include="_ReportForm\Rpt_SPurchasetoExcel.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ChangePasswordSuccess.aspx.cs">
+      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ChangePasswordSuccess.aspx.designer.cs">
+      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\LoginForm.aspx.cs">
+      <DependentUpon>LoginForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\LoginForm.aspx.designer.cs">
+      <DependentUpon>LoginForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet_Report.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet_Report.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Site1.Master.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site1.Master.designer.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+    </Compile>
+    <Compile Include="_Class\BodyClass.cs" />
+    <Compile Include="_Class\BodyOption.cs" />
+    <Compile Include="_Class\Connection.cs" />
+    <Compile Include="_Class\SearchMCNumber.cs" />
+    <Compile Include="_Class\Tb_User.cs" />
+    <Compile Include="_Class\_Accessories.cs" />
+    <Compile Include="_Class\_Act.cs" />
+    <Compile Include="_Class\_Amphur.cs" />
+    <Compile Include="_Class\_Bank.cs" />
+    <Compile Include="_Class\_Branch.cs" />
+    <Compile Include="_Class\_Career.cs" />
+    <Compile Include="_Class\_CarType.cs" />
+    <Compile Include="_Class\_Company.cs" />
+    <Compile Include="_Class\_Customer.cs" />
+    <Compile Include="_Class\_Discount.cs" />
+    <Compile Include="_Class\_District.cs" />
+    <Compile Include="_Class\_Education.cs" />
+    <Compile Include="_Class\_Encryption.cs" />
+    <Compile Include="_Class\_Finance.cs" />
+    <Compile Include="_Class\_Income.cs" />
+    <Compile Include="_Class\_Insurance.cs" />
+    <Compile Include="_Class\_Insurance1.cs" />
+    <Compile Include="_Class\_Model.cs" />
+    <Compile Include="_Class\_Postel.cs" />
+    <Compile Include="_Class\_Province.cs" />
+    <Compile Include="_Class\_Purchase.cs" />
+    <Compile Include="_Class\_Regis.cs" />
+    <Compile Include="_Class\_SQLConnection.cs" />
+    <Compile Include="_Class\_Transpot.cs" />
+    <Compile Include="_Form\CRpt_PurchaseNew.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CRpt_PurchaseNew.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="_Form\_LogOutForm.aspx.cs">
+      <DependentUpon>_LogOutForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="_Form\_LogOutForm.aspx.designer.cs">
+      <DependentUpon>_LogOutForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="_Form\_MainForm.aspx.cs">
+      <DependentUpon>_MainForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="_Form\_MainForm.aspx.designer.cs">
+      <DependentUpon>_MainForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="_Form\_PurchaseForm.aspx.cs">
+      <DependentUpon>_PurchaseForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="_Form\_PurchaseForm.aspx.designer.cs">
+      <DependentUpon>_PurchaseForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="_Form\_SetAccSTDList.cs" />
+    <Compile Include="_Form\_SPurchaseForm.aspx.cs">
+      <DependentUpon>_SPurchaseForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="_Form\_SPurchaseForm.aspx.designer.cs">
+      <DependentUpon>_SPurchaseForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="_ReportForm\CRpt_Purchase1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CRpt_Purchase.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="_ReportForm\Rpt_PurchaseForm.aspx.cs">
+      <DependentUpon>Rpt_PurchaseForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="_ReportForm\Rpt_PurchaseForm.aspx.designer.cs">
+      <DependentUpon>Rpt_PurchaseForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="_ReportForm\Rpt_SPurchasetoExcel.aspx.cs">
+      <DependentUpon>Rpt_SPurchasetoExcel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="_ReportForm\Rpt_SPurchasetoExcel.aspx.designer.cs">
+      <DependentUpon>Rpt_SPurchasetoExcel.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Account\Web.config" />
+    <Content Include="Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataSet_Report.xsc">
+      <DependentUpon>DataSet_Report.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet_Report.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet_Report.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet_Report.xss">
+      <DependentUpon>DataSet_Report.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Site1.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="_Form\CRpt_PurchaseNew.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CRpt_PurchaseNew.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_ReportForm\CRpt_Purchase.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CRpt_Purchase1.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>16897</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
